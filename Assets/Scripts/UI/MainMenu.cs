@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -9,14 +11,29 @@ public class MainMenu : MonoBehaviour
     private GameObject mainMenuContainer;
     private GameObject settingsContainer;
     private GameObject characterContainer;
+    public Slider volumeSlider;
+    public Slider effectSlider;
+    public Slider musicSlider;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Setting the different screens in the menu
         settingsContainer = GameObject.Find("SettingsContainer");
         mainMenuContainer = GameObject.Find("MainMenuContainer");
         characterContainer = GameObject.Find("ChooseCharacterContainer");
         SwitchToMainMenuScreen();
+
+        // Setting the different sliders
+        GameObject volumeText = volumeSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject;
+        volumeSlider.onValueChanged.AddListener(delegate { SliderValueChange(volumeSlider, volumeText); });
+
+        GameObject effectText = effectSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject;
+        effectSlider.onValueChanged.AddListener(delegate { SliderValueChange(effectSlider, effectText); });
+
+        GameObject musicText = musicSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject;
+        musicSlider.onValueChanged.AddListener(delegate { SliderValueChange(musicSlider, musicText); });
+
     }
 
     public void SwitchToMainMenuScreen()
@@ -46,5 +63,10 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    void SliderValueChange(Slider slider, GameObject textObject)
+    {
+        textObject.GetComponent<TextMeshProUGUI>().text = (slider.value * 100).ToString("F0") +"%";
     }
 }
