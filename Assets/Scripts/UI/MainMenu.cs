@@ -70,6 +70,7 @@ public class MainMenu : MonoBehaviour
 
     void SliderValueChange(Slider slider, GameObject textObject)
     {
+        // Change the text in the indicator in percentage
         textObject.GetComponent<TextMeshProUGUI>().text = (slider.value * 100).ToString("F0") +"%";
     }
 }
