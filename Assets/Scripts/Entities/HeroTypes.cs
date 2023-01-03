@@ -13,6 +13,19 @@ namespace HeroTypes
         static bool hasWon = false;
 
         new public int health = Warrior.maxHealth;
+
+        new public void Action1()
+        {
+
+        }
+        new public void Action2()
+        {
+
+        }
+        new public void Action3()
+        {
+
+        }
     }
 
     public class Mage : Hero
@@ -24,6 +37,19 @@ namespace HeroTypes
         static bool hasWon = false;
 
         new public int health = Mage.maxHealth;
+
+        new public void Action1()
+        {
+
+        }
+        new public void Action2()
+        {
+
+        }
+        new public void Action3()
+        {
+
+        }
     }
 
     public class Archer : Hero
@@ -35,6 +61,18 @@ namespace HeroTypes
         static bool hasWon = false;
 
         new public int health = Archer.maxHealth;
+
+        new public void Action1()
+        {
+
+        }
+        new public void Action2()
+        {
+
+        }
+        new public void Action3()
+        {
+
+        }
     }
 }
-

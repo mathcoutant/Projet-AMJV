@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     private Camera cam;
     private NavMeshAgent nma;
-    private Animator animator;
 
     // Start is called before the first frame update
     void Start()

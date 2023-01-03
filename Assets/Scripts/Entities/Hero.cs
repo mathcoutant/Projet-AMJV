@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Heroes : MonoBehaviour
+public class Hero : Entity
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Action1()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    }
+    public void Action2()
     {
-        
+
+    }
+    public void Action3()
+    {
+
     }
 }
