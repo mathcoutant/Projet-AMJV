@@ -1146,7 +1146,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 559172011}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.4445637
+  m_Size: 0.26011267
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2649,7 +2649,7 @@ GameObject:
   - component: {fileID: 797344125}
   - component: {fileID: 797344124}
   m_Layer: 5
-  m_Name: Text
+  m_Name: CharacterDescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2693,7 +2693,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Health :\nDamages : \nDifficulty :\n\nMax wave reached : \n... games played"
+  m_text: "Health :\n\nMax wave reached : \n... games played"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2720,7 +2720,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.95
+  m_fontSize: 54.05
   m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2883,7 +2883,7 @@ GameObject:
   - component: {fileID: 929396571}
   - component: {fileID: 929396570}
   m_Layer: 5
-  m_Name: Name
+  m_Name: CharacterNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3400,7 +3400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00008704395}
+  m_AnchoredPosition: {x: 0, y: -0.0000013111203}
   m_SizeDelta: {x: 0, y: 435.1754}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1012708623
@@ -4606,8 +4606,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1621604885}
   m_HandleRect: {fileID: 1621604884}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.94428986
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5680,7 +5680,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1798781299}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 406905354}
+        m_MethodName: ChangeDescription
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1798781299
 MonoBehaviour:
   m_ObjectHideFlags: 0

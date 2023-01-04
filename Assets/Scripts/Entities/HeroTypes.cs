@@ -6,11 +6,11 @@ namespace HeroTypes
 {
     public class Warrior : Hero
     {
-        static string nameClass = "Warrior";
-        static int maxHealth = 50;
-        static int waveReached = 1;
-        static int timesPlayed = 0;
-        static bool hasWon = false;
+        new public static string nameClass = "Warrior";
+        new public static int maxHealth = 50;
+        new public static int waveReached = 0;
+        new public static int timesPlayed = 0;
+        new public static bool hasWon = false;
 
         new public int health = Warrior.maxHealth;
 
@@ -30,11 +30,11 @@ namespace HeroTypes
 
     public class Mage : Hero
     {
-        static string nameClass = "Mage";
-        static int maxHealth = 20;
-        static int waveReached = 1;
-        static int timesPlayed = 0;
-        static bool hasWon = false;
+        new public static string nameClass = "Mage";
+        new public static int maxHealth = 20;
+        new public static int waveReached = 0;
+        new public static int timesPlayed = 0;
+        new public static bool hasWon = false;
 
         new public int health = Mage.maxHealth;
 
@@ -54,11 +54,11 @@ namespace HeroTypes
 
     public class Archer : Hero
     {
-        static string nameClass = "Archer";
-        static int maxHealth = 30;
-        static int waveReached = 1;
-        static int timesPlayed = 0;
-        static bool hasWon = false;
+        new public static string nameClass = "Archer";
+        new public static int maxHealth = 30;
+        new public static int waveReached = 0;
+        new public static int timesPlayed = 0;
+        new public static bool hasWon = false;
 
         new public int health = Archer.maxHealth;
 
