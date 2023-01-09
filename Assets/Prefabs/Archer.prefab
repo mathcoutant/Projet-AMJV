@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3871308428640336669}
   - component: {fileID: 3871308428640336668}
   - component: {fileID: 3871308428640336666}
-  - component: {fileID: 3871308428640336667}
+  - component: {fileID: 7259854773054344206}
   m_Layer: 8
   m_Name: Archer
   m_TagString: Untagged
@@ -118,7 +118,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3871308428640336667
+--- !u!114 &7259854773054344206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,9 +127,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3871308428640336665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8069e3bba2f9a58469e5158a3bc65505, type: 3}
+  m_Script: {fileID: 11500000, guid: a55c57d6a9ad3da438de6134e3b65655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  projectile: {fileID: 4443279679063108317, guid: e0f67213e8329d34191ad21305698c4d,
-    type: 3}
+  projectile: {fileID: 0}
