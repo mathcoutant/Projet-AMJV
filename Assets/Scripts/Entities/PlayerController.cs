@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
@@ -17,13 +16,13 @@ public class PlayerController : MonoBehaviour
     public float cooldownAction3 = 1f;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rigidB = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         MovePlayer();
         RotatePlayerToMouse();
@@ -66,7 +65,7 @@ public class PlayerController : MonoBehaviour
         float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler( new Vector3(0, angle, 0));
     }
-
+    
     IEnumerator Cooldown(int numAction)
     {
         switch (numAction)
@@ -84,5 +83,6 @@ public class PlayerController : MonoBehaviour
                 canDoAction3 = true;
                 break;
         }
+
     }
 }

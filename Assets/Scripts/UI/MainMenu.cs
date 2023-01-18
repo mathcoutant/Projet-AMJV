@@ -1,30 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
-
-    private GameObject mainMenuContainer;
-    private GameObject settingsContainer;
-    private GameObject characterContainer;
     public Slider volumeSlider;
     public Slider effectSlider;
     public Slider musicSlider;
     public TMP_Dropdown resolutionDropdown;
-    private GameObject nameDescriptionText;
-    private GameObject descriptionText;
-    private GameObject victoryIndicator;
+    [SerializeField] private Sprite warriorImage;
+    [SerializeField] private Sprite mageImage;
+    [SerializeField] private Sprite archerImage;
+    private GameObject characterContainer;
     private Image characterImage;
-    [SerializeField] private Sprite warriorImage = null;
-    [SerializeField] private Sprite mageImage = null;
-    [SerializeField] private Sprite archerImage = null;
+    private GameObject descriptionText;
+
+    private GameObject mainMenuContainer;
+    private GameObject nameDescriptionText;
+    private GameObject settingsContainer;
+    private GameObject victoryIndicator;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         characterImage = GameObject.Find("CharacterImageContainer").GetComponent<Image>();
         warriorImage = Resources.Load<Sprite>("Images/CharacterImages/canardtrosad");
@@ -45,21 +43,22 @@ public class MainMenu : MonoBehaviour
 
         // Setting the different sliders for the settings screen
         volumeSlider.value = 1;
-        TextMeshProUGUI volumeText = volumeSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject.GetComponent<TextMeshProUGUI>();
+        var volumeText = volumeSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject
+            .GetComponent<TextMeshProUGUI>();
         volumeSlider.onValueChanged.AddListener(delegate { SliderValueChange(volumeSlider, volumeText); });
 
         effectSlider.value = 1;
-        TextMeshProUGUI effectText = effectSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject.GetComponent<TextMeshProUGUI>();
+        var effectText = effectSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject
+            .GetComponent<TextMeshProUGUI>();
         effectSlider.onValueChanged.AddListener(delegate { SliderValueChange(effectSlider, effectText); });
 
         musicSlider.value = 1;
-        TextMeshProUGUI musicText = musicSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject.GetComponent<TextMeshProUGUI>();
+        var musicText = musicSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject
+            .GetComponent<TextMeshProUGUI>();
         musicSlider.onValueChanged.AddListener(delegate { SliderValueChange(musicSlider, musicText); });
 
         // Add listener to the dropdown
-        resolutionDropdown.onValueChanged.AddListener(delegate {
-            ResolutionDropdownValueChanged();
-        });
+        resolutionDropdown.onValueChanged.AddListener(delegate { ResolutionDropdownValueChanged(); });
     }
 
     public void SwitchToMainMenuScreen()
@@ -75,6 +74,7 @@ public class MainMenu : MonoBehaviour
         settingsContainer.SetActive(true);
         characterContainer.SetActive(false);
     }
+
     public void SwitchToCharacterScreen()
     {
         mainMenuContainer.SetActive(false);
@@ -86,6 +86,7 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
     public void QuitGame()
     {
         Application.Quit();
@@ -94,12 +95,12 @@ public class MainMenu : MonoBehaviour
     private void SliderValueChange(Slider slider, TextMeshProUGUI textObject)
     {
         // Change the text in the indicator in percentage
-        textObject.text = (slider.value * 100).ToString("F0") +"%";
+        textObject.text = (slider.value * 100).ToString("F0") + "%";
     }
 
     private void ResolutionDropdownValueChanged()
     {
-        switch(resolutionDropdown.value)
+        switch (resolutionDropdown.value)
         {
             case 0:
                 Screen.SetResolution(1920, 1080, true);
@@ -119,12 +120,28 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-   public void ChangeDescription(int i)
+    public void ChangeDescription(int i)
     {
-        string desc = "";
-        string[] tab = new string[] {Hero.nameClass, Hero.maxHealth.ToString(), Hero.waveReached.ToString(), Hero.timesPlayed.ToString(), Hero.hasWon.ToString() };
-        if (i == 0) { tab = new string[] { Warrior.nameClass, Warrior.maxHealth.ToString(), Warrior.waveReached.ToString(), Warrior.timesPlayed.ToString(), Warrior.hasWon.ToString() }; };
-        if (i == 1) { tab = new string[] { Mage.nameClass, Mage.maxHealth.ToString(), Mage.waveReached.ToString(), Mage.timesPlayed.ToString(), Mage.hasWon.ToString() }; };
+        var desc = "";
+        string[] tab =
+        {
+            Hero.nameClass, Entity.maxHealth.ToString(), Hero.waveReached.ToString(), Hero.timesPlayed.ToString(),
+            Hero.hasWon.ToString()
+        };
+        if (i == 0)
+            tab = new[]
+            {
+                Warrior.nameClass, Warrior.maxHealth.ToString(), Warrior.waveReached.ToString(),
+                Warrior.timesPlayed.ToString(), Warrior.hasWon.ToString()
+            };
+        ;
+        if (i == 1)
+            tab = new[]
+            {
+                Mage.nameClass, Mage.maxHealth.ToString(), Mage.waveReached.ToString(), Mage.timesPlayed.ToString(),
+                Mage.hasWon.ToString()
+            };
+        ;
         //if (i == 2) { tab = new string[] { Archer.nameClass, Archer.maxHealth.ToString(), Archer.waveReached.ToString(), Archer.timesPlayed.ToString(), Archer.hasWon.ToString() }; };
 
         desc += "Health : " + tab[1] + "\n" + "\n";
@@ -134,16 +151,12 @@ public class MainMenu : MonoBehaviour
 
         nameDescriptionText.GetComponent<TextMeshProUGUI>().text = tab[0];
         descriptionText.GetComponent<TextMeshProUGUI>().text = desc;
-        if (i == 0) { characterImage.sprite = warriorImage; }
-        if (i == 1) { characterImage.sprite = mageImage; }
-        if (i == 2) { characterImage.sprite = archerImage; }
+        if (i == 0) characterImage.sprite = warriorImage;
+        if (i == 1) characterImage.sprite = mageImage;
+        if (i == 2) characterImage.sprite = archerImage;
         if (tab[4] == "True")
-        {
             victoryIndicator.SetActive(true);
-        } else
-        {
+        else
             victoryIndicator.SetActive(false);
-        }
     }
-
 }

@@ -1,27 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Mage : Hero
+﻿public class Mage : Hero
 {
-    new public static string nameClass = "Mage";
-    new public static int maxHealth = 20;
-    new public static int waveReached = 0;
-    new public static int timesPlayed = 0;
-    new public static bool hasWon = false;
+    public new static string nameClass = "Mage";
+    public new static int maxHealth = 20;
+    public new static int waveReached = 0;
+    public new static int timesPlayed = 0;
+    public new static bool hasWon = false;
 
-    new public int health = Mage.maxHealth;
+    public new int health = maxHealth;
 
-    new public void Action1()
+    public new void Action1()
     {
-
     }
-    new public void Action2()
-    {
 
+    public new void Action2()
+    {
     }
-    new public void Action3()
-    {
 
+    public new void Action3()
+    {
     }
 }
