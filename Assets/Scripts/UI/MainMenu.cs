@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class MainMenu : MonoBehaviour
 {
 
@@ -22,6 +23,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Sprite warriorImage = null;
     [SerializeField] private Sprite mageImage = null;
     [SerializeField] private Sprite archerImage = null;
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +62,8 @@ public class MainMenu : MonoBehaviour
         resolutionDropdown.onValueChanged.AddListener(delegate {
             ResolutionDropdownValueChanged();
         });
+        audioManager = GameObject.Find("Audio").GetComponent<AudioManager>();
+
     }
 
     public void SwitchToMainMenuScreen()
@@ -84,10 +88,12 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        audioManager.SaveVolumeValues();
         SceneManager.LoadScene(1);
     }
     public void QuitGame()
     {
+        audioManager.SaveVolumeValues();
         Application.Quit();
     }
 
@@ -103,6 +109,7 @@ public class MainMenu : MonoBehaviour
         {
             case 0:
                 Screen.SetResolution(1920, 1080, true);
+                Screen.fullScreen = true;
                 break;
             case 1:
                 Screen.SetResolution(1920, 1080, false);
