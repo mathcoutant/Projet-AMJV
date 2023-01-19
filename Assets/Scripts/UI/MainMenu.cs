@@ -8,7 +8,6 @@ using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
-
     private GameObject mainMenuContainer;
     private GameObject settingsContainer;
     private GameObject characterContainer;
@@ -24,6 +23,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Sprite mageImage = null;
     [SerializeField] private Sprite archerImage = null;
     AudioManager audioManager;
+    AudioSource settingsEffectSampleSound;
+    private bool canPlayEffectSample = true;
 
     // Start is called before the first frame update
     void Start()
@@ -46,15 +47,12 @@ public class MainMenu : MonoBehaviour
         SwitchToMainMenuScreen();
 
         // Setting the different sliders for the settings screen
-        volumeSlider.value = 1;
         TextMeshProUGUI volumeText = volumeSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject.GetComponent<TextMeshProUGUI>();
         volumeSlider.onValueChanged.AddListener(delegate { SliderValueChange(volumeSlider, volumeText); });
 
-        effectSlider.value = 1;
         TextMeshProUGUI effectText = effectSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject.GetComponent<TextMeshProUGUI>();
         effectSlider.onValueChanged.AddListener(delegate { SliderValueChange(effectSlider, effectText); });
 
-        musicSlider.value = 1;
         TextMeshProUGUI musicText = musicSlider.transform.parent.gameObject.transform.Find("Percentage").gameObject.GetComponent<TextMeshProUGUI>();
         musicSlider.onValueChanged.AddListener(delegate { SliderValueChange(musicSlider, musicText); });
 
@@ -62,9 +60,12 @@ public class MainMenu : MonoBehaviour
         resolutionDropdown.onValueChanged.AddListener(delegate {
             ResolutionDropdownValueChanged();
         });
-        audioManager = GameObject.Find("Audio").GetComponent<AudioManager>();
 
+        // Setting the objects for the audio
+        audioManager = GameObject.Find("Audio").GetComponent<AudioManager>();
+        settingsEffectSampleSound = GameObject.Find("EffectSample").GetComponent<AudioSource>();
     }
+
 
     public void SwitchToMainMenuScreen()
     {
@@ -102,7 +103,20 @@ public class MainMenu : MonoBehaviour
         // Change the text in the indicator in percentage
         textObject.text = (slider.value * 100).ToString("F0") +"%";
     }
-
+    public void PlayEffectSampleSound()
+    {
+        if(canPlayEffectSample)
+        {
+            settingsEffectSampleSound.Play();
+            canPlayEffectSample = false;
+            StartCoroutine(DelayEffectSample());
+        }
+    }
+    IEnumerator DelayEffectSample()
+    {
+        yield return new WaitForSeconds(0.1f);
+        canPlayEffectSample = true;
+    }
     private void ResolutionDropdownValueChanged()
     {
         switch(resolutionDropdown.value)
@@ -168,5 +182,4 @@ public class MainMenu : MonoBehaviour
             }
         }
     }
-
 }

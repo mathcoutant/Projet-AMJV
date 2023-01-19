@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
@@ -33,6 +31,13 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.SetFloat("effectVolume", value);
         audioMixer.SetFloat("effectVolume", Mathf.Log10(effectVolume) * 20);
     }
+    //Save the setting values keep the same volumes between scenes
+    public void SaveVolumeValues()
+    {
+        PlayerPrefs.SetFloat("mainVolume", mainVolume);
+        PlayerPrefs.SetFloat("musicVolume", musicVolume);
+        PlayerPrefs.SetFloat("effectVolume", effectVolume);
+    }
     public void LoadValues()
     {
         mainVolume = PlayerPrefs.GetFloat("mainVolume");
@@ -41,11 +46,5 @@ public class AudioManager : MonoBehaviour
         audioMixer.SetFloat("mainVolume", Mathf.Log10(mainVolume) * 20);
         audioMixer.SetFloat("musicVolume", Mathf.Log10(musicVolume) * 20);
         audioMixer.SetFloat("effectVolume", Mathf.Log10(effectVolume) * 20);
-    }
-    public void SaveVolumeValues()
-    {
-        PlayerPrefs.SetFloat("mainVolume", mainVolume);
-        PlayerPrefs.SetFloat("musicVolume", musicVolume);
-        PlayerPrefs.SetFloat("effectVolume", effectVolume);
     }
 }
