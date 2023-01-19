@@ -12,7 +12,7 @@ public class Mage : Hero
     public Mage()
     {
         maxHealth = 20;
-        health = maxHealth - 5;
+        health = maxHealth;
     }
     new public void Action1()
     {

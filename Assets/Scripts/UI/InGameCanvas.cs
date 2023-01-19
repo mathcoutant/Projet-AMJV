@@ -19,7 +19,7 @@ public class InGameCanvas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hero = new Mage();
+        hero = new Mage(); // IL FAUT SELECTIONNER LE HERO DU JOUEUR C4EST PAS FINI
         healthbar = GameObject.Find("HealthBarIndicator").GetComponent<Image>();
         timerText = GameObject.Find("TextTimeIndicator").GetComponent<TextMeshProUGUI>();
         waveText = GameObject.Find("TextWaveIndicator").GetComponent<TextMeshProUGUI>();
