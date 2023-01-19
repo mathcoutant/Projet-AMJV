@@ -1,11 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidB;
+    private InGameCanvas inGameCanvas;
     public float speed = 20f;
 
     // actions options
@@ -20,6 +19,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidB = gameObject.GetComponent<Rigidbody>();
+        inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<InGameCanvas>();
     }
 
     // Update is called once per frame
@@ -72,14 +72,17 @@ public class PlayerController : MonoBehaviour
         switch (numAction)
         {
             case 1:
+                inGameCanvas.DisplayCooldown(1, cooldownAction1);
                 yield return new WaitForSeconds(cooldownAction1);
                 canDoAction1 = true;
                 break;
             case 2:
+                inGameCanvas.DisplayCooldown(2, cooldownAction2);
                 yield return new WaitForSeconds(cooldownAction2);
                 canDoAction2 = true;
                 break;
             case 3:
+                inGameCanvas.DisplayCooldown(3, cooldownAction3);
                 yield return new WaitForSeconds(cooldownAction3);
                 canDoAction3 = true;
                 break;

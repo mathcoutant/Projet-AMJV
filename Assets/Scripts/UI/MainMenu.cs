@@ -122,27 +122,43 @@ public class MainMenu : MonoBehaviour
    public void ChangeDescription(int i)
     {
         string desc = "";
-        string[] tab = new string[] {Hero.nameClass, Hero.maxHealth.ToString(), Hero.waveReached.ToString(), Hero.timesPlayed.ToString(), Hero.hasWon.ToString() };
-        if (i == 0) { tab = new string[] { Warrior.nameClass, Warrior.maxHealth.ToString(), Warrior.waveReached.ToString(), Warrior.timesPlayed.ToString(), Warrior.hasWon.ToString() }; };
-        if (i == 1) { tab = new string[] { Mage.nameClass, Mage.maxHealth.ToString(), Mage.waveReached.ToString(), Mage.timesPlayed.ToString(), Mage.hasWon.ToString() }; };
-        //if (i == 2) { tab = new string[] { Archer.nameClass, Archer.maxHealth.ToString(), Archer.waveReached.ToString(), Archer.timesPlayed.ToString(), Archer.hasWon.ToString() }; };
+        if (i == 0) { 
+            Warrior selectedHero = new Warrior();
+            desc += "Health : " + selectedHero.maxHealth.ToString() + "\n" + "\n";
+            //desc += "Difficulty : " + "" + "\n";
+            desc += "Max wave reached : " + Warrior.waveReached.ToString() + "\n";
+            desc += Warrior.timesPlayed.ToString() + " games played";
 
-        desc += "Health : " + tab[1] + "\n" + "\n";
-        //desc += "Difficulty : " + "" + "\n";
-        desc += "Max wave reached : " + tab[2] + "\n";
-        desc += tab[3] + " games played";
+            nameDescriptionText.GetComponent<TextMeshProUGUI>().text = Warrior.nameClass;
+            descriptionText.GetComponent<TextMeshProUGUI>().text = desc;
+            characterImage.sprite = warriorImage;
+            if (Warrior.hasWon)
+            {
+                victoryIndicator.SetActive(true);
+            }
+            else
+            {
+                victoryIndicator.SetActive(false);
+            }
+        }
+        if (i == 1) { 
+            Mage selectedHero = new Mage();
+            desc += "Health : " + selectedHero.maxHealth.ToString() + "\n" + "\n";
+            //desc += "Difficulty : " + "" + "\n";
+            desc += "Max wave reached : " + Mage.waveReached.ToString() + "\n";
+            desc += Mage.timesPlayed.ToString() + " games played";
 
-        nameDescriptionText.GetComponent<TextMeshProUGUI>().text = tab[0];
-        descriptionText.GetComponent<TextMeshProUGUI>().text = desc;
-        if (i == 0) { characterImage.sprite = warriorImage; }
-        if (i == 1) { characterImage.sprite = mageImage; }
-        if (i == 2) { characterImage.sprite = archerImage; }
-        if (tab[4] == "True")
-        {
-            victoryIndicator.SetActive(true);
-        } else
-        {
-            victoryIndicator.SetActive(false);
+            nameDescriptionText.GetComponent<TextMeshProUGUI>().text = Mage.nameClass;
+            descriptionText.GetComponent<TextMeshProUGUI>().text = desc;
+            characterImage.sprite = mageImage;
+            if (Mage.hasWon)
+            {
+                victoryIndicator.SetActive(true);
+            }
+            else
+            {
+                victoryIndicator.SetActive(false);
+            }
         }
     }
 

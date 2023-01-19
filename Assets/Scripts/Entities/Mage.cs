@@ -5,13 +5,15 @@ using UnityEngine;
 public class Mage : Hero
 {
     new public static string nameClass = "Mage";
-    new public static int maxHealth = 20;
     new public static int waveReached = 0;
     new public static int timesPlayed = 0;
-    new public static bool hasWon = false;
+    new static public bool hasWon = false;
 
-    new public int health = Mage.maxHealth;
-
+    public Mage()
+    {
+        maxHealth = 20;
+        health = maxHealth - 5;
+    }
     new public void Action1()
     {
 
