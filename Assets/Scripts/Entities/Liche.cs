@@ -10,7 +10,6 @@ public class Liche : Enemy
     private GameObject[] allies;
     private bool canAttack = true;
     private float cooldown = 10;
-    private NavMeshAgent navAgent;
     private Collider player;
     private CapsuleCollider AOEcollider;
     private State state = State.STATE_IDLE;

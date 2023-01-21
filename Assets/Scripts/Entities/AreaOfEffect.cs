@@ -31,10 +31,21 @@ public class AreaOfEffect : MonoBehaviour
 
             var copy = new List<Entity>(entities);
             foreach (var entity in copy)
+            {
+
+                if (entity == null)
+                {
+                    entities.Remove(entity);
+                    continue;
+                }
+
                 if (entity.CompareTag("Player"))
                     entity.TakeDamage(1);
                 else if (entity.CompareTag("healableEnnemy")) entity.Heal(1);
+            }
         }
+
         Destroy(gameObject);
+        
     }
 }

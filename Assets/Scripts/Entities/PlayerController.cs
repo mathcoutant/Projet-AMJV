@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
@@ -6,53 +7,60 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidB;
     public float speed = 20f;
+    private Hero hero;
 
     // actions options
-    private bool canDoAction1 = true;
+    [SerializeField] bool canDoAction1 = true;
     public float cooldownAction1 = 0.3f;
-    private bool canDoAction2 = true;
+    [SerializeField] bool canDoAction2 = true;
     public float cooldownAction2 = 1f;
-    private bool canDoAction3 = true;
+    [SerializeField] bool canDoAction3 = true;
     public float cooldownAction3 = 1f;
 
     // Start is called before the first frame update
     private void Start()
     {
+        hero = gameObject.GetComponent<Hero>();
         rigidB = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        MovePlayer();
-        RotatePlayerToMouse();
-
         if (Input.GetKeyDown(KeyCode.Mouse0) && canDoAction1)
         {
             canDoAction1 = false;
             // Do action 1
+            hero.Action1();
             StartCoroutine(Cooldown(1));
         }
         if (Input.GetKeyDown(KeyCode.Mouse1) && canDoAction2)
         {
             canDoAction2 = false;
-            // Do action 2
+            hero.Action2();
             StartCoroutine(Cooldown(2));
         }
         if (Input.GetKeyDown(KeyCode.Space) && canDoAction3)
         {
             canDoAction3 = false;
-            // Do action 3
+            hero.Action3();
             StartCoroutine(Cooldown(3));
         }
     }
 
-    void MovePlayer()
+    private void FixedUpdate()
+    {
+        HandleMoveInput();
+        RotatePlayerToMouse();
+    }
+
+    void HandleMoveInput()
     {
         float hSpeed = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         float vSpeed = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
 
-        rigidB.velocity = new Vector3(hSpeed, 0, -vSpeed);
+        Vector3 velocity = new Vector3(hSpeed, 0, -vSpeed);
+        hero.Move(velocity);
     }
     void RotatePlayerToMouse()
     {
@@ -63,7 +71,8 @@ public class PlayerController : MonoBehaviour
         mousePos.y = mousePos.y - objPos.y;
 
         float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler( new Vector3(0, angle, 0));
+        Quaternion rotation = Quaternion.Euler( new Vector3(0, angle, 0));
+        hero.Rotate(rotation);
     }
     
     IEnumerator Cooldown(int numAction)
