@@ -32,6 +32,7 @@ public class EnemyFactory : MonoBehaviour
     private Vector3 selectSpawnPosition()
     {
         GameObject selectedSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        if (selectedSpawnPoint == null) { return new Vector3(0, 1, 0); }
         Vector3 currentPoint = selectedSpawnPoint.transform.position;
         currentPoint.y += .5f;
         return currentPoint;
