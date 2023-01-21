@@ -132,4 +132,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   maxHealth: 10
-  projectile: {fileID: 0}
+  projectile: {fileID: 4443279679063108317, guid: e0f67213e8329d34191ad21305698c4d,
+    type: 3}

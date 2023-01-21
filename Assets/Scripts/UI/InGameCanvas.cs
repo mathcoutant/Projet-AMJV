@@ -26,6 +26,8 @@ public class InGameCanvas : MonoBehaviour
         cooldownImage1 = GameObject.Find("Action1Cooldown").GetComponent<Image>();
         cooldownImage2 = GameObject.Find("Action2Cooldown").GetComponent<Image>();
         cooldownImage3 = GameObject.Find("Action3Cooldown").GetComponent<Image>();
+
+        UpdateWaveDisplay(0);
     }
 
     // Update is called once per frame
@@ -38,7 +40,6 @@ public class InGameCanvas : MonoBehaviour
             UpdateTimerDisplay(timer);
             lastTimerUpdate = timer;
         }
-        UpdateWaveDisplay(2); // A NE PAS FAIRE A CHAQUE FRAME ET A CHANGER : IL FAUT PRENDRE LA VALEUR DE LA VAGUE DANS LE SCRIPT QUI GERE TOUT CA
     }
 
     private void UpdateHealthBar()

@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.SetFloat("effectVolume", value);
         audioMixer.SetFloat("effectVolume", Mathf.Log10(effectVolume) * 20);
     }
-    //Save the setting values keep the same volumes between scenes
+    //Save the setting values keep the same volumes overtime
     public void SaveVolumeValues()
     {
         PlayerPrefs.SetFloat("mainVolume", mainVolume);
