@@ -22,7 +22,7 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (canSpawnNextWave)
+        if (canSpawnNextWave && enemyFactory.enemyNumber == 0)
         {
             canSpawnNextWave = false;
             currentWave++;

@@ -9,7 +9,7 @@ public class EnemyFactory : MonoBehaviour
 
     private GameObject[] spawnPoints;
 
-    private int enemyNumber = 0;
+    public int enemyNumber = 0;
     public int maxEnemyNumber = 500;
 
     // Start is called before the first frame update
@@ -45,5 +45,6 @@ public class EnemyFactory : MonoBehaviour
     public void decreaseEnemyCounter()
     {
         enemyNumber -= 1;
+        if (enemyNumber < 0) { enemyNumber = 0; }
     }
 }
