@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyFactory : MonoBehaviour
 {
@@ -21,12 +19,6 @@ public class EnemyFactory : MonoBehaviour
         enemyTypes = new GameObject[] { enemy1, enemy2, enemy3 };
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     // return true if the enemy is spawned
     public bool SpawnEnemy()
     {
@@ -41,7 +33,7 @@ public class EnemyFactory : MonoBehaviour
     {
         GameObject selectedSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         Vector3 currentPoint = selectedSpawnPoint.transform.position;
-        currentPoint.y += .3f;
+        currentPoint.y += .5f;
         return currentPoint;
     }
     private GameObject selectEnemy()

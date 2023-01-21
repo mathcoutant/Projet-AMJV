@@ -49,12 +49,12 @@ public class Archer : Enemy
             case State.STATE_IDLE:
                 if (IsOnScreen())
                 {
-                    Debug.Log("IDLE -> SHOOTING");
+                    //Debug.Log("IDLE -> SHOOTING");
                     state = State.STATE_SHOOTING;
                 }
                 else
                 {
-                    Debug.Log("IDLE -> MOVING");
+                    //Debug.Log("IDLE -> MOVING");
                     state = State.STATE_MOVING;
                 }
 
@@ -63,7 +63,7 @@ public class Archer : Enemy
                 navAgent.destination = player.transform.position;
                 if (IsOnScreen())
                 {
-                    Debug.Log("MOVING -> SHOOTING");
+                    //Debug.Log("MOVING -> SHOOTING");
                     state = State.STATE_SHOOTING;
                 }
 
@@ -100,10 +100,10 @@ public class Archer : Enemy
 
     void MultiShoot()
     {
-        Debug.Log("MultiShooting");
+        //Debug.Log("MultiShooting");
         Vector3 toward = (player.transform.position - transform.position);
         int arrowNumber = Random.Range(1, 6);
-        Debug.Log("Arrow Count: "+ arrowNumber);
+        //Debug.Log("Arrow Count: "+ arrowNumber);
         for (int i = 0; i < arrowNumber; i++)
         {
             float mean = 0.5f + arrowNumber / 2f;
@@ -114,7 +114,7 @@ public class Archer : Enemy
 
     void Shoot(Vector3 dir, float angleBias)
     {
-        Debug.Log("Shoot: " + dir + " " + angleBias);
+        //Debug.Log("Shoot: " + dir + " " + angleBias);
         Quaternion toward = Quaternion.LookRotation(dir);
         GameObject p = Instantiate(projectile, transform.position,toward * Quaternion.AngleAxis(angleBias,Vector3.up));
     }

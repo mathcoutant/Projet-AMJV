@@ -38,7 +38,6 @@ public class InGameCanvas : MonoBehaviour
             UpdateTimerDisplay(timer);
             lastTimerUpdate = timer;
         }
-        UpdateWaveDisplay(2); // A NE PAS FAIRE A CHAQUE FRAME ET A CHANGER : IL FAUT PRENDRE LA VALEUR DE LA VAGUE DANS LE SCRIPT QUI GERE TOUT CA
     }
 
     private void UpdateHealthBar()
@@ -56,6 +55,7 @@ public class InGameCanvas : MonoBehaviour
     }
     public void UpdateWaveDisplay(int waveNumber)
     {
+        Debug.Log(waveNumber);
         waveText.text = "Wave : " + waveNumber; 
     }
 
