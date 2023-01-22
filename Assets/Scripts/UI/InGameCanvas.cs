@@ -13,8 +13,9 @@ public class InGameCanvas : MonoBehaviour
     Image cooldownImage1;
     Image cooldownImage2;
     Image cooldownImage3;
-    float timer = 0;
+    public float timer = 0;
     float lastTimerUpdate = 0;
+    public int waveNum;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +58,7 @@ public class InGameCanvas : MonoBehaviour
     }
     public void UpdateWaveDisplay(int waveNumber)
     {
+        waveNum = waveNumber;
         waveText.text = "Wave : " + waveNumber; 
     }
 
