@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private int damage;
 
     private Rigidbody rigidbody;
 
@@ -10,9 +12,19 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+
     }
 
-    // Update is called once per frame
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
+    }
+    
     private void Update()
     {
         rigidbody.velocity = speed * transform.forward;
@@ -20,6 +32,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
+        Entity entity = other.GetComponent<Entity>();
+        if(entity) entity.TakeDamage(damage);
         Destroy(gameObject);
     }
 }

@@ -131,5 +131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  damagedMaterial: {fileID: 2100000, guid: 812338c41f2a857408789d3c101c7edc, type: 2}
   areaOfEffect: {fileID: 2521872862605522691, guid: 4d478e2fb67504d40ab2d2c2ac4f4901,
     type: 3}

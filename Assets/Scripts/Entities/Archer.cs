@@ -8,19 +8,17 @@ public class Archer : Enemy
     private float cooldown = 5f;
     private NavMeshAgent navAgent;
     private GameObject player;
-    private Renderer renderer;
     private float spread = 20f;
     private State state;
 
     private float t;
 
     // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
         state = State.STATE_IDLE;
-        renderer = GetComponent<Renderer>();
         navAgent = GetComponent<NavMeshAgent>();
-        player = GameObject.Find("Player");
+        player = GameObject.FindObjectOfType<Hero>().gameObject;
         camera = Camera.main;
     }
 
@@ -31,6 +29,12 @@ public class Archer : Enemy
         switch (state)
         {
             case State.STATE_IDLE:
+                if (navAgent.enabled == false)
+                {
+                    state = State.STATE_IDLE;
+                    break;
+                }
+                
                 if (IsOnScreen())
                 {
                     state = State.STATE_SHOOTING;
@@ -42,6 +46,11 @@ public class Archer : Enemy
 
                 break;
             case State.STATE_MOVING:
+                if (navAgent.enabled == false)
+                {
+                    state = State.STATE_IDLE;
+                    break;
+                }
                 navAgent.destination = player.transform.position;
                 if (IsOnScreen())
                 {
@@ -50,6 +59,14 @@ public class Archer : Enemy
 
                 break;
             case State.STATE_SHOOTING:
+                
+                if (navAgent.enabled == false)
+                {
+                    state = State.STATE_IDLE;
+                    break;
+                }
+                
+                
                 t += Time.deltaTime;
                 if (t > cooldown)
                 {

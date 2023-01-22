@@ -4870,9 +4870,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  damagedMaterial: {fileID: 0}
   swordHitPosition: {fileID: 485073448}
   hitRadius: 1
   swirlRadius: 4
+  poundRadius: 0
+  poundKnockback: 0
 --- !u!1001 &4843374792507206898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4894,12 +4897,17 @@ PrefabInstance:
     - target: {fileID: 1624050837873597559, guid: 462971c5e358a8a48863166ee5635b58,
         type: 3}
       propertyPath: m_Name
-      value: Player Variant
+      value: Warrior
       objectReference: {fileID: 0}
     - target: {fileID: 3440832939498051860, guid: 462971c5e358a8a48863166ee5635b58,
         type: 3}
       propertyPath: speed
-      value: 500
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440832939498051860, guid: 462971c5e358a8a48863166ee5635b58,
+        type: 3}
+      propertyPath: cooldownAction1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3440832939498051860, guid: 462971c5e358a8a48863166ee5635b58,
         type: 3}

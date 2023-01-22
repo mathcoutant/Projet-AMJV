@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3301262596808337319}
   - component: {fileID: 3195497677009638028}
   - component: {fileID: 9041921909051410298}
-  - component: {fileID: 5117682931317103342}
+  - component: {fileID: 8788683860660541075}
+  - component: {fileID: 2720427254032182993}
   m_Layer: 9
   m_Name: Arrow
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  damage: 0
 --- !u!54 &9041921909051410298
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63,8 +65,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!135 &5117682931317103342
-SphereCollider:
+--- !u!114 &8788683860660541075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443279679063108317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ed6c2871509eb428ef33928206da8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 10
+--- !u!136 &2720427254032182993
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -73,8 +88,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
+  m_Radius: 0.1
+  m_Height: 2
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8546401468607304548
 GameObject:
@@ -87,7 +103,6 @@ GameObject:
   - component: {fileID: 8513380246568610334}
   - component: {fileID: 6620664941502912388}
   - component: {fileID: 7315954735365022949}
-  - component: {fileID: 3164249508964846375}
   m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
@@ -156,17 +171,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3164249508964846375
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8546401468607304548}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
