@@ -1,11 +1,11 @@
-﻿using System;
 using UnityEngine;
 using System.Collections;
-using UnityEngine.AI;
+
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidB;
+    private InGameCanvas inGameCanvas;
     public float speed = 20f;
     private Hero hero;
 
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         hero = gameObject.GetComponent<Hero>();
         rigidB = gameObject.GetComponent<Rigidbody>();
+        inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<InGameCanvas>();
     }
 
     // Update is called once per frame
@@ -30,7 +31,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && canDoAction1)
         {
             canDoAction1 = false;
-            // Do action 1
             hero.Action1();
             StartCoroutine(Cooldown(1));
         }
@@ -80,14 +80,17 @@ public class PlayerController : MonoBehaviour
         switch (numAction)
         {
             case 1:
+                inGameCanvas.DisplayCooldown(1, cooldownAction1);
                 yield return new WaitForSeconds(cooldownAction1);
                 canDoAction1 = true;
                 break;
             case 2:
+                inGameCanvas.DisplayCooldown(2, cooldownAction2);
                 yield return new WaitForSeconds(cooldownAction2);
                 canDoAction2 = true;
                 break;
             case 3:
+                inGameCanvas.DisplayCooldown(3, cooldownAction3);
                 yield return new WaitForSeconds(cooldownAction3);
                 canDoAction3 = true;
                 break;

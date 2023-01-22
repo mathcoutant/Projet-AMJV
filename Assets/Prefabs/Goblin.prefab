@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2862429929837572490}
   m_Layer: 8
   m_Name: Goblin
-  m_TagString: Untagged
+  m_TagString: HealableEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  maxHealth: 10
   damagedMaterial: {fileID: 2100000, guid: 812338c41f2a857408789d3c101c7edc, type: 2}
   swordHitPoint: {fileID: 3749614663174084286}
 --- !u!1 &3749614663174084286

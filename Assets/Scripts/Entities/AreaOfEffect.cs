@@ -41,7 +41,7 @@ public class AreaOfEffect : MonoBehaviour
 
                 if (entity.CompareTag("Player"))
                     entity.TakeDamage(1);
-                else if (entity.CompareTag("healableEnnemy")) entity.Heal(1);
+                else if (entity.CompareTag("HealableEnemy")) entity.Heal(1);
             }
         }
 

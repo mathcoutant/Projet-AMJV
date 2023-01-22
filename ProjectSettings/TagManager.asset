@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - healableEnnemy
   - Floor
+  - SpawnPoint
+  - HealableEnemy
+  - healableEnemy
   layers:
   - Default
   - TransparentFX
@@ -15,12 +17,12 @@ TagManager:
   - UI
   - 
   - 
-  - Ennemy
-  - Projectile
-  - AOE
-  - IgnoreAll
+  - Enemy
+  - EnemyProjectile
   - PlayerProjectile
-  - Terrain
+  - AOE
+  - 
+  - 
   - 
   - 
   - 
@@ -40,12 +42,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 3850700715
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Foreground
-    uniqueID: 2661877699
     locked: 0

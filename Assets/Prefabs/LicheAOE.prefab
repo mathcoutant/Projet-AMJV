@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2521872862605522696}
   - component: {fileID: 2521872862605522701}
   - component: {fileID: 2521872862605522700}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LicheAOE
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7259854773054344206}
   m_Layer: 8
   m_Name: Archer
-  m_TagString: healableEnnemy
+  m_TagString: HealableEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  maxHealth: 10
   damagedMaterial: {fileID: 2100000, guid: 812338c41f2a857408789d3c101c7edc, type: 2}
   projectile: {fileID: 4443279679063108317, guid: e0f67213e8329d34191ad21305698c4d,
     type: 3}

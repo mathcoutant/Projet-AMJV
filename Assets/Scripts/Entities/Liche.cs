@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
-using UnityEditor.Media;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -90,7 +87,7 @@ public class Liche : Enemy
     {
         while (true)
         {
-            allies = GameObject.FindGameObjectsWithTag("healableEnnemy");
+            allies = GameObject.FindGameObjectsWithTag("HealableEnemy");
             yield return new WaitForSeconds(2);
         }
     }

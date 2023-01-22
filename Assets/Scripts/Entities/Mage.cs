@@ -2,8 +2,8 @@
 
 public class Mage : Hero
 {
+
     public new static string nameClass = "Mage";
-    public new static int maxHealth = 20;
     public new static int waveReached = 0;
     public new static int timesPlayed = 0;
     public new static bool hasWon = false;
@@ -15,12 +15,19 @@ public class Mage : Hero
     
     private int explodeDamage = 5;
     private int iceWallDamage = 0;
-    
+  
+public Mage()
+{
+    maxHealth = 20;
+    health = maxHealth;
+}
+
     protected override void Start()
-    {
+{
         base.Start();
         cam = Camera.main;
     }
+
     public override void Action1()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);

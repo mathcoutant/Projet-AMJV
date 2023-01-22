@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1731032987094303197}
   - component: {fileID: 3873399975146175559}
   - component: {fileID: 839703073469566758}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 1394738742335712441}
   - component: {fileID: 1718099097800457552}
   - component: {fileID: 6963051915357910205}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Dagger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

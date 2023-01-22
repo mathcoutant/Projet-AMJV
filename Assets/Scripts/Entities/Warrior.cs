@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class Warrior : Hero
 {
     public new static string nameClass = "Warrior";
-    public new static int maxHealth = 50;
     public new static int waveReached = 0;
     public new static int timesPlayed = 0;
     public new static bool hasWon = false;
@@ -19,16 +18,21 @@ public class Warrior : Hero
     [SerializeField] private float poundRadius;
     [SerializeField] private float poundKnockback;
 
-    protected override void Start()
-    {
+    protected override void Start() {
         base.Start();
         cam = Camera.main;
         particleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
+    public Warrior()
+    {
+        maxHealth = 50;
+        health = maxHealth;
+    }
+    
     public override void Action1()
     {
-        LayerMask mask = LayerMask.GetMask("Ennemy");
+        LayerMask mask = LayerMask.GetMask("Enemy");
         Collider[] colliders = Physics.OverlapSphere(swordHitPosition.transform.position,hitRadius,mask);
         foreach (Collider col in colliders)
         {
@@ -93,7 +97,7 @@ public class Warrior : Hero
 
     private void DoSwirlDamage()
     {
-        LayerMask mask = LayerMask.GetMask("Ennemy");
+        LayerMask mask = LayerMask.GetMask("Enemy");
         Collider[] colliders = Physics.OverlapSphere(transform.position, swirlRadius,mask);
         foreach (Collider collider in colliders)
         {
@@ -104,7 +108,7 @@ public class Warrior : Hero
 
     private void DoPoundDamage()
     {
-        LayerMask mask = LayerMask.GetMask("Ennemy");
+        LayerMask mask = LayerMask.GetMask("Enemy");
         Collider[] colliders = Physics.OverlapSphere(transform.position, poundRadius, mask);
         foreach (Collider collider in colliders)
         {

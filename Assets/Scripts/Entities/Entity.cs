@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public static int maxHealth = 10;
     public int health = 10;
+    public int maxHealth = 10;
+    
 
     private Material defaultMaterial;
     [SerializeField] private Material damagedMaterial;
     private Renderer renderer;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         renderer = GetComponent<Renderer>();
         defaultMaterial = renderer.material;

@@ -24,7 +24,7 @@ public class ExplodeOnDestroy : MonoBehaviour
 
     private void OnDestroy()
     {
-        LayerMask mask = LayerMask.GetMask("Ennemy");
+        LayerMask mask = LayerMask.GetMask("Enemy");
         Collider[] colliders =  Physics.OverlapSphere(transform.position, 0.5f,mask);
         foreach (Collider collider in colliders)
         {

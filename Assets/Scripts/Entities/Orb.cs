@@ -28,9 +28,11 @@ public class Orb : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("healableEnnemy") || other.CompareTag("Ennemy"))
+
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy)
         {
-            other.GetComponent<Enemy>().TakeDamage(2);
+            enemy.TakeDamage(2);
             other.GetComponent<Rigidbody>().AddForce((other.transform.position - target.position).normalized * force);
             remainingHit--;
             if (remainingHit <= 0) Destroy(gameObject);

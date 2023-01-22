@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class Rogue : Hero
 {
     public new static string nameClass = "Rogue";
-    public new static int maxHealth = 40;
     public new static int waveReached = 0;
     public new static int timesPlayed = 0;
     public new static bool hasWon = false;
@@ -20,6 +19,12 @@ public class Rogue : Hero
     private Camera cam;
     private int poisonDamage = 2;
 
+    public Rogue()
+    {
+        maxHealth = 20;
+        health = maxHealth;
+    }
+    
     protected override void Start()
     {
         base.Start();
@@ -29,7 +34,7 @@ public class Rogue : Hero
 
     public override void Action1()
     {
-        LayerMask mask = LayerMask.GetMask("Ennemy");
+        LayerMask mask = LayerMask.GetMask("Enemy");
         Collider[] colliders = Physics.OverlapSphere(daggerHitPosition.transform.position,hitRadius,mask);
         foreach (Collider col in colliders)
         {
@@ -56,7 +61,7 @@ public class Rogue : Hero
 
     public override void Action3()
     {
-        LayerMask mask = LayerMask.GetMask("Ennemy");
+        LayerMask mask = LayerMask.GetMask("Enemy");
         Collider[] colliders = Physics.OverlapSphere(transform.position,smokeBombRadius,mask);
         foreach (Collider col in colliders)
         {
