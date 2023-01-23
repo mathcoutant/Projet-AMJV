@@ -41,7 +41,7 @@ public class Mage : Hero
         {
             pos = hit.point;
             Vector3 target = pos - transform.position;
-            target.y = transform.position.y;
+            target.y = 0;
             StartCoroutine(Shoot(target));
         }
         
