@@ -6,7 +6,9 @@ public class Hero : Entity
     public static int waveReached = 0;
     public static int timesPlayed = 0;
     public static bool hasWon = false;
+    public float speed = 20f;
     private PopupManager popupManager;
+    protected Animator animator;
     protected PlayerController playerController;
     protected Rigidbody rigidbody;
     protected HeroState state = HeroState.STATE_MOVE;
@@ -22,6 +24,7 @@ public class Hero : Entity
     protected virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
         popupManager = FindObjectOfType<PopupManager>();
         CalculateRequiredXpPoints();
@@ -44,9 +47,15 @@ public class Hero : Entity
     {
     }
 
-    public void Move(Vector3 velocity)
+    public void Move(Vector3 input)
     {
-        if(state == HeroState.STATE_MOVE) rigidbody.velocity = velocity;
+        if (state == HeroState.STATE_MOVE)
+        {
+            rigidbody.velocity = input * (speed * Time.deltaTime);
+            input = Quaternion.LookRotation(transform.forward, Vector3.up) * input;
+            animator.SetFloat("moveY",input.x);
+            animator.SetFloat("moveX",input.z);
+        }
     }
 
     public void Rotate(Quaternion rotation)
@@ -71,7 +80,7 @@ public class Hero : Entity
         switch (upgrade)
         {
             case "Speed Upgrade":
-                playerController.speed = playerController.speed + 20f;
+                speed += 20f;
                 break; 
             case "Cooldown Reduction 1":
                 playerController.cooldownAction1 *= 0.95f;

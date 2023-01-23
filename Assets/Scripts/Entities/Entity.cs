@@ -16,13 +16,13 @@ public class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         renderer = GetComponent<Renderer>();
-        defaultMaterial = renderer.material;
+        //defaultMaterial = renderer.material;
 
     }
 
     public void TakeDamage(int damage)
     {
-        StartCoroutine(DamageFlashing());
+        //StartCoroutine(DamageFlashing());
         health -= damage;
         if(health <= 0) StartCoroutine(Die());
     }
