@@ -51,8 +51,10 @@ public class Warrior : Hero
         Collider[] colliders = Physics.OverlapSphere(swordHitPosition.transform.position,hitRadius,mask);
         foreach (Collider col in colliders)
         {
-            col.gameObject.GetComponent<Entity>().TakeDamage(swordDamage);
-            col.gameObject.GetComponent<Rigidbody>().AddForce((col.transform.position - transform.position)*200f);
+            Enemy enemy = col.gameObject.GetComponent<Enemy>();
+            Rigidbody rb = col.gameObject.GetComponent<Rigidbody>();
+            if(enemy) enemy.TakeDamage(swordDamage);
+            if(rb) rb.AddForce((col.transform.position - transform.position)*200f);
         }
     }
     public override void Action2()
@@ -122,7 +124,10 @@ public class Warrior : Hero
         Collider[] colliders = Physics.OverlapSphere(transform.position, swirlRadius,mask);
         foreach (Collider collider in colliders)
         {
-            collider.GetComponent<Enemy>().TakeDamage(1);
+            Enemy enemy = collider.GetComponent<Enemy>();
+            Rigidbody rb = collider.GetComponent<Rigidbody>();
+            if(enemy) enemy.TakeDamage(1);
+            if(rb) rb.AddForce((collider.transform.position - transform.position).normalized * 50f);
         }
 
     }

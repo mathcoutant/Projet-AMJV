@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Hero : Entity
 {
@@ -15,6 +16,7 @@ public class Hero : Entity
     public int xpPoints = 0;
     public int nextLevelXpPoints;
     [SerializeField] int level = 0;
+    private AudioSource xpAudio;
 
     public enum HeroState
     {
@@ -28,6 +30,7 @@ public class Hero : Entity
         playerController = GetComponent<PlayerController>();
         popupManager = FindObjectOfType<PopupManager>();
         CalculateRequiredXpPoints();
+        xpAudio = GameObject.Find("XPsound").GetComponent<AudioSource>();
     }
 
 
@@ -51,7 +54,10 @@ public class Hero : Entity
     {
         if (state == HeroState.STATE_MOVE)
         {
-            rigidbody.velocity = input * (speed * Time.deltaTime);
+            float grav = rigidbody.velocity.y;
+            Vector3 velocity = input * (speed * Time.deltaTime);
+            velocity.y = grav;
+            rigidbody.velocity = velocity;
             input = Quaternion.LookRotation(transform.forward, Vector3.up) * input;
             animator.SetFloat("moveY",input.x);
             animator.SetFloat("moveX",input.z);
@@ -66,6 +72,7 @@ public class Hero : Entity
     public void IncrementXP()
     {
         xpPoints++;
+        xpAudio.Play();
         if (xpPoints >= nextLevelXpPoints)
         {
             xpPoints -= nextLevelXpPoints;
@@ -96,5 +103,11 @@ public class Hero : Entity
                 health = maxHealth;
                 break;
         }
+    }
+    public override IEnumerator Die()
+    {
+        yield return new WaitForSeconds(1);
+        popupManager.DisplayGameOverPopup();
+        Destroy(gameObject);
     }
 }

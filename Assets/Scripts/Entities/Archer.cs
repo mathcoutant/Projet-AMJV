@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
@@ -21,7 +22,7 @@ public class Archer : Enemy
     {
         state = State.STATE_IDLE;
         navAgent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindObjectOfType<Hero>().gameObject;
+        player = FindObjectOfType<Hero>().gameObject;
         camera = Camera.main;
     }
 
@@ -33,6 +34,9 @@ public class Archer : Enemy
         switch (state)
         {
             case State.STATE_IDLE:
+                animator.SetBool("Idle",true);
+                animator.SetBool("Move",false);
+                animator.SetBool("Attack",false);
                 if (navAgent.enabled == false)
                 {
                     state = State.STATE_IDLE;
@@ -50,6 +54,9 @@ public class Archer : Enemy
 
                 break;
             case State.STATE_MOVING:
+                animator.SetBool("Move",true);
+                animator.SetBool("Idle",false);
+                animator.SetBool("Attack", false);
                 if (navAgent.enabled == false)
                 {
                     state = State.STATE_IDLE;
@@ -58,11 +65,15 @@ public class Archer : Enemy
                 navAgent.destination = player.transform.position;
                 if (IsOnScreen())
                 {
+                    
                     state = State.STATE_SHOOTING;
                 }
 
                 break;
             case State.STATE_SHOOTING:
+                animator.SetBool("Move",false);
+                animator.SetBool("Idle",false);
+                animator.SetBool("Attack", false);
                 if (navAgent.enabled == false)
                 {
                     state = State.STATE_IDLE;
@@ -73,11 +84,14 @@ public class Archer : Enemy
                 t += Time.deltaTime;
                 if (t > cooldown)
                 {
-                    MultiShoot();
+                    animator.SetBool("Attack",true);
+                    StartCoroutine(MultiShoot());
                     t = 0f;
                 }
 
                 navAgent.destination = transform.position;
+                animator.SetBool("Idle",true);
+                animator.SetBool("Move",false);
                 if (!IsOnScreen())
                 {
                     t = 0f;
@@ -99,16 +113,18 @@ public class Archer : Enemy
         }
     }
 
-    private void MultiShoot()
+    private IEnumerator MultiShoot()
     {
-        var toward = player.transform.position - transform.position;
-        var arrowNumber = Random.Range(1, 6);
+        yield return new WaitForSeconds(0.6f);
+        Vector3 toward = player.transform.position - transform.position;
+        int arrowNumber = Random.Range(1, 6);
         for (var i = 0; i < arrowNumber; i++)
         {
             var mean = 0.5f + arrowNumber / 2f;
             var angle = (i + 1 - mean) * spread;
             Shoot(toward, angle);
         }
+        animator.SetBool("Attack",false);
     }
 
     private void Shoot(Vector3 dir, float angleBias)

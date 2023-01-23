@@ -12,18 +12,21 @@ public class Entity : MonoBehaviour
     private Material defaultMaterial;
     [SerializeField] private Material damagedMaterial;
     private Renderer renderer;
+    private AudioSource hitSound;
 
     protected virtual void Awake()
     {
-        renderer = GetComponent<Renderer>();
-        //defaultMaterial = renderer.material;
+        renderer = GetComponentInChildren<Renderer>();
+        defaultMaterial = renderer.material;
+        hitSound = gameObject.GetComponent<AudioSource>();
 
     }
 
     public void TakeDamage(int damage)
     {
-        //StartCoroutine(DamageFlashing());
+        StartCoroutine(DamageFlashing());
         health -= damage;
+        hitSound.Play();
         if(health <= 0) StartCoroutine(Die());
     }
 
@@ -40,7 +43,7 @@ public class Entity : MonoBehaviour
         if (health > maxHealth) health = maxHealth;
     }
 
-    protected virtual IEnumerator Die()
+    public virtual IEnumerator Die()
     {
         yield return new WaitForSeconds(1);
         Destroy(gameObject);

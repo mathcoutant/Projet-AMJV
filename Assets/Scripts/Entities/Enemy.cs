@@ -9,16 +9,20 @@ public class Enemy : Entity
 {
     private EnemyFactory factory;
     [SerializeField] private GameObject xpOrb;
+    protected Animator animator;
+
     protected override void Awake()
     {
         base.Awake();
+        animator = GetComponent<Animator>();
         factory = FindObjectOfType<EnemyFactory>();
     }
 
 
-    protected override IEnumerator Die()
+    public override IEnumerator Die()
     {
         factory.decreaseEnemyCounter();
+        animator.SetBool("Die",true);
         yield return new WaitForSeconds(1);
         Instantiate(xpOrb, transform.position, transform.rotation);
         Destroy(gameObject);
