@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Mage : Hero
 {
@@ -41,8 +42,9 @@ public class Mage : Hero
             pos = hit.point;
             Vector3 target = pos - transform.position;
             target.y = transform.position.y;
-            Shoot(target);
+            StartCoroutine(Shoot(target));
         }
+        
     }
 
     public override void Action2()
@@ -66,11 +68,14 @@ public class Mage : Hero
         }
     }
 
-    private void Shoot(Vector3 target)
-    {
+    private IEnumerator Shoot(Vector3 target)
+    {        
+        animator.SetBool("attack1",true);
+        yield return new WaitForSeconds(0.2f);
         Quaternion toward = Quaternion.LookRotation(target);
         GameObject obj = Instantiate(fireProjectile, transform.position, toward);
         obj.GetComponent<ExplodeOnDestroy>().SetExplosionDamage(explodeDamage);
+        animator.SetBool("attack1",false);
     }
 
 

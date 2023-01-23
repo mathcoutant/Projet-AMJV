@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidB;
     private InGameCanvas inGameCanvas;
-    public float speed = 20f;
     private Hero hero;
 
     // actions options
@@ -56,8 +55,8 @@ public class PlayerController : MonoBehaviour
 
     void HandleMoveInput()
     {
-        float hSpeed = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        float vSpeed = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        float hSpeed = Input.GetAxis("Vertical");
+        float vSpeed = Input.GetAxis("Horizontal");
 
         Vector3 velocity = new Vector3(hSpeed, 0, -vSpeed);
         hero.Move(velocity);

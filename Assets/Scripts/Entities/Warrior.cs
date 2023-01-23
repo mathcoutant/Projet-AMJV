@@ -90,13 +90,13 @@ public class Warrior : Hero
 
     IEnumerator SwirlAttack()
     {
+        speed *= 1.5f;
         for(int i = 0; i < 6; i++)
         {
             yield return new WaitForSeconds(0.5f);
             DoSwirlDamage();
         }
-
-
+        speed /= 1.5f;
     }
 
     private void DoSwirlDamage()

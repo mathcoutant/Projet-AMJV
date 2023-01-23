@@ -6,11 +6,14 @@ public class Hero : Entity
     public static int waveReached = 0;
     public static int timesPlayed = 0;
     public static bool hasWon = false;
+    public float speed = 20f;
     private PopupManager popupManager;
-    private PlayerController playerController;
+    protected Animator animator;
+    protected PlayerController playerController;
     protected Rigidbody rigidbody;
     protected HeroState state = HeroState.STATE_MOVE;
-    [SerializeField] int xpPoints = 0;
+    public int xpPoints = 0;
+    public int nextLevelXpPoints;
     [SerializeField] int level = 0;
 
     protected enum HeroState
@@ -21,10 +24,17 @@ public class Hero : Entity
     protected virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
         popupManager = FindObjectOfType<PopupManager>();
+        CalculateRequiredXpPoints();
     }
 
+
+    private void CalculateRequiredXpPoints()
+    {
+         nextLevelXpPoints = (level + 1) * (level + 1);
+    }
     public virtual void Action1()
     {
     }
@@ -37,9 +47,15 @@ public class Hero : Entity
     {
     }
 
-    public void Move(Vector3 velocity)
+    public void Move(Vector3 input)
     {
-        if(state == HeroState.STATE_MOVE) rigidbody.velocity = velocity;
+        if (state == HeroState.STATE_MOVE)
+        {
+            rigidbody.velocity = input * (speed * Time.deltaTime);
+            input = Quaternion.LookRotation(transform.forward, Vector3.up) * input;
+            animator.SetFloat("moveY",input.x);
+            animator.SetFloat("moveX",input.z);
+        }
     }
 
     public void Rotate(Quaternion rotation)
@@ -50,10 +66,10 @@ public class Hero : Entity
     public void IncrementXP()
     {
         xpPoints++;
-        int requiredXP = (level + 1) * (level + 1);
-        if (xpPoints >= requiredXP)
+        if (xpPoints >= nextLevelXpPoints)
         {
-            xpPoints -= requiredXP;
+            xpPoints -= nextLevelXpPoints;
+            CalculateRequiredXpPoints();
             level++;
             popupManager.DisplayUpgradePopup();
         }
@@ -64,7 +80,7 @@ public class Hero : Entity
         switch (upgrade)
         {
             case "Speed Upgrade":
-                playerController.speed = playerController.speed + 20f;
+                speed += 20f;
                 break; 
             case "Cooldown Reduction 1":
                 playerController.cooldownAction1 *= 0.95f;

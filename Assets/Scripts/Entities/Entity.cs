@@ -16,15 +16,15 @@ public class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         renderer = GetComponent<Renderer>();
-        defaultMaterial = renderer.material;
+        //defaultMaterial = renderer.material;
 
     }
 
     public void TakeDamage(int damage)
     {
-        StartCoroutine(DamageFlashing());
+        //StartCoroutine(DamageFlashing());
         health -= damage;
-        if(health <= 0) Destroy(gameObject);
+        if(health <= 0) StartCoroutine(Die());
     }
 
     IEnumerator DamageFlashing()
@@ -38,5 +38,11 @@ public class Entity : MonoBehaviour
     {
         health += healingAmount;
         if (health > maxHealth) health = maxHealth;
+    }
+
+    protected virtual IEnumerator Die()
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
     }
 }

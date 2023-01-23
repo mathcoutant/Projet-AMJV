@@ -96,8 +96,9 @@ public class MainMenu : MonoBehaviour
 
         CharacterSelection.classSelection = selectedString;
         audioManager.SaveVolumeValues();
-        SceneManager.LoadScene(2);
-        SceneManager.LoadScene(1,LoadSceneMode.Additive);
+        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2,LoadSceneMode.Additive);
+
     }
 
     public void QuitGame()

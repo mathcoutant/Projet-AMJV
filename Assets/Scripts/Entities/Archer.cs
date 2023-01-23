@@ -13,6 +13,7 @@ public class Archer : Enemy
     private float spread = 20f;
     private State state;
 
+
     private float t;
 
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class Archer : Enemy
     // Update is called once per frame
     private void Update()
     {
+        if (player == null) return;
         switch (state)
         {
             case State.STATE_IDLE:
@@ -61,7 +63,6 @@ public class Archer : Enemy
 
                 break;
             case State.STATE_SHOOTING:
-                
                 if (navAgent.enabled == false)
                 {
                     state = State.STATE_IDLE;
@@ -89,8 +90,8 @@ public class Archer : Enemy
                 bool IsOnScreen()
                 {
                     var screenPoint = camera.WorldToScreenPoint(transform.position);
-                    if (100 < screenPoint.x && screenPoint.x < 1800)
-                        if (100 < screenPoint.y && screenPoint.y < 800)
+                    if (Screen.width *0.05f < screenPoint.x && screenPoint.x < Screen.width * 0.95f)
+                        if (Screen.height * 0.05f < screenPoint.y && screenPoint.y < Screen.height * 0.95f)
                             return true;
 
                     return false;

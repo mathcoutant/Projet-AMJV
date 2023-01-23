@@ -34,7 +34,7 @@ public class UpgradesManager : MonoBehaviour
             upgrades.Add(new Tuple<string, string>("Wall Size Up", "Your ice wall is bigger."));
             upgrades.Add(new Tuple<string, string>("Wall Damage", "Spawning your ice wall will damage enemies."));
         }
-        if (player.GetType() == typeof(Mage))
+        if (player.GetType() == typeof(Rogue))
         {
             upgrades.Add(new Tuple<string, string>("Poisoned Knife", "Your knife poisons enemies."));
             upgrades.Add(new Tuple<string, string>("Throwing Knife Speed Up", "You throw your knife faster."));
