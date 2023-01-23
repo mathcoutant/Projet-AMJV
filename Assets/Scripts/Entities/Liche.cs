@@ -82,7 +82,6 @@ public class Liche : Enemy
             case State.STATE_ATTACKING:
                 animator.SetBool("Move",false);
                 animator.SetBool("Idle",false);
-                animator.SetBool("Attack",true);
                 Attack();
                 state = State.STATE_IDLE;
                 break;
@@ -91,6 +90,7 @@ public class Liche : Enemy
 
     private void Attack()
     {
+        animator.SetBool("Attack",true);
         navAgent.speed = 1f;
         Vector3 pos = transform.position + Vector3.down;
         Instantiate(areaOfEffect, pos, transform.rotation);
