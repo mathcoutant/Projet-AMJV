@@ -134,6 +134,7 @@ MonoBehaviour:
   health: 10
   maxHealth: 10
   damagedMaterial: {fileID: 2100000, guid: 812338c41f2a857408789d3c101c7edc, type: 2}
+  xpOrb: {fileID: 5241632311991784157, guid: 6ddeb15b9b3f6434f9367765aa36743a, type: 3}
   swordHitPoint: {fileID: 3749614663174084286}
 --- !u!1 &3749614663174084286
 GameObject:

@@ -3,7 +3,9 @@ guid: 3224bb8fd7eb7f640beeee6fdfa8c730
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - damagedMaterial: {instanceID: 0}
+  - xpOrb: {fileID: 5241632311991784157, guid: 6ddeb15b9b3f6434f9367765aa36743a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
