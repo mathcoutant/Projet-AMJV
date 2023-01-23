@@ -36,6 +36,17 @@ public class Warrior : Hero
     
     public override void Action1()
     {
+        StartCoroutine(SwordAttack());
+    }
+
+    private IEnumerator SwordAttack()
+    {
+        animator.SetBool("attack1",true);
+        state = HeroState.STATE_STUN;
+        yield return new WaitForSeconds(0.2f);
+        animator.SetBool("attack1", false);
+        state = HeroState.STATE_MOVE;
+        
         LayerMask mask = LayerMask.GetMask("Enemy");
         Collider[] colliders = Physics.OverlapSphere(swordHitPosition.transform.position,hitRadius,mask);
         foreach (Collider col in colliders)
@@ -44,25 +55,29 @@ public class Warrior : Hero
             col.gameObject.GetComponent<Rigidbody>().AddForce((col.transform.position - transform.position)*200f);
         }
     }
-
     public override void Action2()
     {
-        state = HeroState.STATE_STUN;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Vector3 pos;
         if (Physics.Raycast(ray, out hit))
         {
             pos = hit.point;
+            StartCoroutine(JumpAttack(pos));
+
         }
-        else
-        {
-            pos = transform.position;
-        }
-        
-        rigidbody.velocity = SolveInitialVelocityForJump(transform.position, pos);
+
     }
 
+    private IEnumerator JumpAttack(Vector3 pos)
+    {
+        state = HeroState.STATE_STUN;
+        animator.SetBool("attack2",true);
+        rigidbody.velocity = SolveInitialVelocityForJump(transform.position, pos); 
+        yield return new WaitForSeconds(0.1f);
+        animator.SetBool("attack2",false);
+        
+    }
     public override void Action3()
     {
         StartCoroutine(SwirlAttack());
@@ -90,6 +105,7 @@ public class Warrior : Hero
 
     IEnumerator SwirlAttack()
     {
+        animator.SetBool("attack3",true);
         speed *= 1.5f;
         for(int i = 0; i < 6; i++)
         {
@@ -97,6 +113,7 @@ public class Warrior : Hero
             DoSwirlDamage();
         }
         speed /= 1.5f;
+        animator.SetBool("attack3",false);
     }
 
     private void DoSwirlDamage()
