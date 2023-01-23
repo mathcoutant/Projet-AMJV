@@ -7606,6 +7606,11 @@ PrefabInstance:
       propertyPath: cooldownAction2
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3440832939498051860, guid: 462971c5e358a8a48863166ee5635b58,
+        type: 3}
+      propertyPath: cooldownAction3
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8916646755560582809, guid: 462971c5e358a8a48863166ee5635b58,
         type: 3}
       propertyPath: m_RootOrder

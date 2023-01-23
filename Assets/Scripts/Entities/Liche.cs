@@ -30,6 +30,9 @@ public class Liche : Enemy
         switch (state)
         {
             case State.STATE_IDLE:
+                animator.SetBool("Idle",true);
+                animator.SetBool("Move",false);
+                animator.SetBool("Attack",false);
                 if (navAgent.enabled == false)
                 {
                     state = State.STATE_IDLE;
@@ -39,16 +42,27 @@ public class Liche : Enemy
                 if (canAttack && InRange(player)) state = State.STATE_ATTACKING;
                 if (target != null)
                 {
-                    if (InRange(target) && canAttack)
+                    if (InRange(target))
                     {
-                        state = State.STATE_ATTACKING;
-                        break;
+                        if (canAttack)
+                        {
+                            state = State.STATE_ATTACKING;
+                            break;
+                        }
+                        else
+                        {
+                            state = State.STATE_IDLE;
+                            break;
+                        }
                     }
                 }
                 state = State.STATE_SEEKING;
                 break;
 
             case State.STATE_SEEKING:
+                animator.SetBool("Move",true);
+                animator.SetBool("Idle",false);
+                animator.SetBool("Attack", false);
                 if (navAgent.enabled == false)
                 {
                     state = State.STATE_IDLE;
@@ -66,6 +80,9 @@ public class Liche : Enemy
                 break;
 
             case State.STATE_ATTACKING:
+                animator.SetBool("Move",false);
+                animator.SetBool("Idle",false);
+                animator.SetBool("Attack",true);
                 Attack();
                 state = State.STATE_IDLE;
                 break;
@@ -76,7 +93,7 @@ public class Liche : Enemy
     {
         navAgent.speed = 1f;
         Vector3 pos = transform.position + Vector3.down;
-        Instantiate(areaOfEffect, pos, transform.rotation, transform);
+        Instantiate(areaOfEffect, pos, transform.rotation);
         canAttack = false;
         StartCoroutine(Cooldown());
     }
