@@ -14,9 +14,12 @@ public class Mage : Hero
     private Camera cam;
     
     private int explodeDamage = 5;
+    private int orbHitCount = 5;
+    private float orbKnockbackForce = 0f;
+    private float iceWallSize = 1f;
     private int iceWallDamage = 0;
-  
-public Mage()
+
+    public Mage()
 {
     maxHealth = 20;
     health = maxHealth;
@@ -44,7 +47,10 @@ public Mage()
 
     public override void Action2()
     {
-        Instantiate(orbProjectile);
+        GameObject obj = Instantiate(orbProjectile);
+        Orb orb = obj.GetComponent<Orb>();
+        orb.SetHitCount(orbHitCount);
+        orb.SetPushForce(orbKnockbackForce);
     }
 
     public override void Action3()
@@ -68,4 +74,26 @@ public Mage()
     }
 
 
+    public override void ApplyUpgrade(string upgrade)
+    {
+        base.ApplyUpgrade(upgrade);
+        switch (upgrade)
+        {
+            case "Fireball Damage Up":
+                explodeDamage++;
+                break;
+            case "Knockback Orb":
+                orbKnockbackForce += 50f;
+                break;
+            case "Resistant Orb":
+                orbHitCount++;
+                break;
+            case "Wall Size Up":
+                iceWallSize += 0.2f;
+                break;
+            case "Wall Damage":
+                iceWallDamage++;
+                break;
+        }
+    }
 }

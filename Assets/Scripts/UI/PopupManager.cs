@@ -100,7 +100,7 @@ public class PopupManager : MonoBehaviour
 
     public void HideUpgradePopup(int upgradeNum)
     {
-        // player.ApplyUpgrade(possibleUpgrades[upgradeNum].Item1);
+        player.ApplyUpgrade(possibleUpgrades[upgradeNum].Item1);
         Debug.Log("Upgrade : " + possibleUpgrades[upgradeNum].Item1);
         upgradePopupCanvas.SetActive(false);
         Time.timeScale = 1;

@@ -14,10 +14,13 @@ public class Rogue : Hero
     [SerializeField] private GameObject dagger;
     [SerializeField] private float hitRadius;
     [SerializeField] private float smokeBombRadius;
-    [SerializeField] private float daggerSpeed;
     private ParticleSystem particleSystem;
     private Camera cam;
-    private int poisonDamage = 2;
+    
+    private int poisonDamage = 0;
+    private float daggerSpeed = 5f;
+    private int daggerDamage = 2;
+    private float stunDuration = 2f;
 
     public Rogue()
     {
@@ -84,7 +87,7 @@ public class Rogue : Hero
     {
         NavMeshAgent navAgent = entity.GetComponent<NavMeshAgent>();
         navAgent.enabled = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(stunDuration);
         navAgent.enabled = true;
     }
 
@@ -99,11 +102,30 @@ public class Rogue : Hero
         GameObject obj = Instantiate(dagger, transform.position, toward);
         Projectile projectile = obj.GetComponent<Projectile>();
         projectile.SetSpeed(daggerSpeed);
-        projectile.SetDamage(2);
+        projectile.SetDamage(daggerDamage);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public override void ApplyUpgrade(string upgrade)
     {
+        base.ApplyUpgrade(upgrade);
+        switch (upgrade)
+        {
+            case "Poisoned Knife":
+                poisonDamage += 2;
+                break;
+            case "Throwing Knife Speed Up":
+                daggerSpeed += 1f;
+                break;
+            case "Throwing Knife Damage Up":
+                daggerDamage++;
+                break;
+            case "More Confusion":
+                stunDuration += 0.5f;
+                break;
+            case "More Smoke":
+                smokeBombRadius += 1f;
+                break;
+        }
     }
-    
+
 }

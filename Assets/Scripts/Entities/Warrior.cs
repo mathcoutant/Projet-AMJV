@@ -18,6 +18,10 @@ public class Warrior : Hero
     [SerializeField] private float poundRadius;
     [SerializeField] private float poundKnockback;
 
+    private int swordDamage = 5;
+    private int jumpDamage = 2;
+    private int spinDamage = 1;
+
     protected override void Start() {
         base.Start();
         cam = Camera.main;
@@ -36,7 +40,7 @@ public class Warrior : Hero
         Collider[] colliders = Physics.OverlapSphere(swordHitPosition.transform.position,hitRadius,mask);
         foreach (Collider col in colliders)
         {
-            col.gameObject.GetComponent<Entity>().TakeDamage(5);
+            col.gameObject.GetComponent<Entity>().TakeDamage(swordDamage);
             col.gameObject.GetComponent<Rigidbody>().AddForce((col.transform.position - transform.position)*200f);
         }
     }
@@ -112,8 +116,31 @@ public class Warrior : Hero
         Collider[] colliders = Physics.OverlapSphere(transform.position, poundRadius, mask);
         foreach (Collider collider in colliders)
         {
-            collider.GetComponent<Enemy>().TakeDamage(2);
+            collider.GetComponent<Enemy>().TakeDamage(jumpDamage);
             collider.GetComponent<Rigidbody>().AddExplosionForce(poundKnockback,transform.position,poundRadius);
+        }
+    }
+
+    public override void ApplyUpgrade(string upgrade)
+    {
+        base.ApplyUpgrade(upgrade);
+        switch (upgrade)
+        {
+            case "Sword Damage Up":
+                swordDamage++;
+                break;
+            case "Jump Damage Up":
+                jumpDamage++;
+                break;
+            case "Spin Damage Up":
+                spinDamage++;
+                break;
+            case "Jump range up":
+                //TODO ajouter la range pour le jump
+                break;
+            case "Extended damage zone":
+                swirlRadius += 1f;
+                break;
         }
     }
 
