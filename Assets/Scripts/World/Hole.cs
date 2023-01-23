@@ -4,6 +4,6 @@ public class Hole : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        //other.gameObject.GetComponent<Hero>().Die();
+        if (other.gameObject.GetComponent<Hero>()) StartCoroutine(other.gameObject.GetComponent<Hero>().Die());
     }
 }

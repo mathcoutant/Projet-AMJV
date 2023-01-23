@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
     private string selectedString;
     [SerializeField] private Sprite warriorImage = null;
     [SerializeField] private Sprite mageImage = null;
-    [SerializeField] private Sprite archerImage = null;
+    [SerializeField] private Sprite rogueImage = null;
     AudioManager audioManager;
     AudioSource settingsEffectSampleSound;
     private bool canPlayEffectSample = true;
@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
         characterImage = GameObject.Find("CharacterImageContainer").GetComponent<Image>();
         warriorImage = Resources.Load<Sprite>("Images/CharacterImages/canardtrosad");
         mageImage = Resources.Load<Sprite>("Images/CharacterImages/logoDiscord");
-        archerImage = Resources.Load<Sprite>("Images/CharacterImages/logoDiscord");
+        rogueImage = Resources.Load<Sprite>("Images/CharacterImages/logoDiscord");
 
         // Setting the text object for the characters descriptions
         nameDescriptionText = GameObject.Find("CharacterNameText");
@@ -98,6 +98,7 @@ public class MainMenu : MonoBehaviour
         audioManager.SaveVolumeValues();
         SceneManager.LoadScene(1);
         SceneManager.LoadScene(2,LoadSceneMode.Additive);
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);
 
     }
 
@@ -184,6 +185,27 @@ public class MainMenu : MonoBehaviour
             descriptionText.GetComponent<TextMeshProUGUI>().text = desc;
             characterImage.sprite = mageImage;
             if (Mage.hasWon)
+            {
+                victoryIndicator.SetActive(true);
+            }
+            else
+            {
+                victoryIndicator.SetActive(false);
+            }
+        }
+        if (i == 2)
+        {
+            Rogue selectedHero = new Rogue();
+            selectedString = "Rogue";
+            desc += "Health : " + selectedHero.maxHealth.ToString() + "\n" + "\n";
+            //desc += "Difficulty : " + "" + "\n";
+            desc += "Max wave reached : " + Rogue.waveReached.ToString() + "\n";
+            desc += Rogue.timesPlayed.ToString() + " games played";
+
+            nameDescriptionText.GetComponent<TextMeshProUGUI>().text = Rogue.nameClass;
+            descriptionText.GetComponent<TextMeshProUGUI>().text = desc;
+            characterImage.sprite = rogueImage;
+            if (Rogue.hasWon)
             {
                 victoryIndicator.SetActive(true);
             }

@@ -51,6 +51,19 @@ public class PopupManager : MonoBehaviour
         upgradePopupCanvas.SetActive(false);
 
         upgradeManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
+
+        switch (player.GetType().ToString())
+        {
+            case "Warrior":
+                Warrior.timesPlayed += 1;
+                break;
+            case "Mage":
+                Mage.timesPlayed += 1;
+                break;
+            case "Rogue":
+                Rogue.timesPlayed += 1;
+                break;
+        }
     }
 
     public void DisplayVictoryPopup()
@@ -60,7 +73,21 @@ public class PopupManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60);
         int secondes = Mathf.FloorToInt(time % 60);
         victoryTimeText.text = "Final Time : " + String.Format("{0}:{1}", minutes.ToString("D2"), secondes.ToString("D2"));
-
+        switch (player.GetType().ToString())
+        {
+            case "Warrior":
+                Warrior.waveReached = inGameCanvas.waveNum;
+                Warrior.hasWon = true;
+                break;
+            case "Mage":
+                Mage.waveReached = inGameCanvas.waveNum;
+                Mage.hasWon = true;
+                break;
+            case "Rogue":
+                Rogue.waveReached = inGameCanvas.waveNum;
+                Rogue.hasWon = true;
+                break;
+        }
         victoryPopupCanvas.SetActive(true);
     }
 
@@ -74,7 +101,18 @@ public class PopupManager : MonoBehaviour
 
         int wave = inGameCanvas.waveNum - 1;
         deathWaveText.text = "Wave Killed : " + wave.ToString();
-
+        switch (player.GetType().ToString())
+        {
+            case "Warrior":
+                if (Warrior.waveReached < inGameCanvas.waveNum) Warrior.waveReached = inGameCanvas.waveNum;
+                break;
+            case "Mage":
+                if (Mage.waveReached < inGameCanvas.waveNum) Mage.waveReached = inGameCanvas.waveNum;
+                break;
+            case "Rogue":
+                if (Rogue.waveReached < inGameCanvas.waveNum) Rogue.waveReached = inGameCanvas.waveNum;
+                break;
+        }
         gameOverPopupCanvas.SetActive(true);
     }
     public void DisplayUpgradePopup()
@@ -101,7 +139,6 @@ public class PopupManager : MonoBehaviour
     public void HideUpgradePopup(int upgradeNum)
     {
         player.ApplyUpgrade(possibleUpgrades[upgradeNum].Item1);
-        Debug.Log("Upgrade : " + possibleUpgrades[upgradeNum].Item1);
         upgradePopupCanvas.SetActive(false);
         Time.timeScale = 1;
     }
