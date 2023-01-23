@@ -54,7 +54,7 @@ public class Liche : Enemy
                     state = State.STATE_IDLE;
                     break;
                 }
-                AcquireTarget();
+                 AcquireTarget();
                 if (target != null)
                 {
                     navAgent.destination = target.position;

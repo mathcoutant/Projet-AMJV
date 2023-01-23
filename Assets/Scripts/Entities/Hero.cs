@@ -7,7 +7,7 @@ public class Hero : Entity
     public static int timesPlayed = 0;
     public static bool hasWon = false;
     private PopupManager popupManager;
-    private PlayerController playerController;
+    protected PlayerController playerController;
     protected Rigidbody rigidbody;
     protected HeroState state = HeroState.STATE_MOVE;
     public int xpPoints = 0;
