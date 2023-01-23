@@ -33,9 +33,9 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         characterImage = GameObject.Find("CharacterImageContainer").GetComponent<Image>();
-        warriorImage = Resources.Load<Sprite>("Images/CharacterImages/canardtrosad");
-        mageImage = Resources.Load<Sprite>("Images/CharacterImages/logoDiscord");
-        rogueImage = Resources.Load<Sprite>("Images/CharacterImages/logoDiscord");
+        warriorImage = Resources.Load<Sprite>("Images/CharacterImages/warrior");
+        mageImage = Resources.Load<Sprite>("Images/CharacterImages/mage");
+        rogueImage = Resources.Load<Sprite>("Images/CharacterImages/rogue");
 
         // Setting the text object for the characters descriptions
         nameDescriptionText = GameObject.Find("CharacterNameText");
