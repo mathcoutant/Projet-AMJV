@@ -38,6 +38,8 @@ public class Goblin : Enemy
         switch (state)
         {
             case State.STATE_IDLE:
+                animator.SetBool("Idle",true);
+                animator.SetBool("Move",false);
                 if (navAgent.enabled)
                 {
                     navAgent.destination = player.transform.position;
@@ -46,6 +48,8 @@ public class Goblin : Enemy
 
                 break;
             case State.STATE_MOVING:
+                animator.SetBool("Idle",false);
+                animator.SetBool("Move",true);
                 if ((player.transform.position - transform.position).magnitude < 2f)
                 {
                     navAgent.destination = transform.position;
@@ -72,11 +76,13 @@ public class Goblin : Enemy
 
     IEnumerator Attack()
     {
+        animator.SetBool("Attack",true);
         yield return new WaitForSeconds(0.7f);
         if (Physics.OverlapSphere(swordHitPoint.transform.position, radius).Contains(playerCollider))
         {
             player.GetComponent<Entity>().TakeDamage(5);
         }
+        animator.SetBool("Attack",false);
         StartCoroutine(Cooldown());
     }
 

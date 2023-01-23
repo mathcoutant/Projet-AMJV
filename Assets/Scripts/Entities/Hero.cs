@@ -51,7 +51,10 @@ public class Hero : Entity
     {
         if (state == HeroState.STATE_MOVE)
         {
-            rigidbody.velocity = input * (speed * Time.deltaTime);
+            float grav = rigidbody.velocity.y;
+            Vector3 velocity = input * (speed * Time.deltaTime);
+            velocity.y = grav;
+            rigidbody.velocity = velocity;
             input = Quaternion.LookRotation(transform.forward, Vector3.up) * input;
             animator.SetFloat("moveY",input.x);
             animator.SetFloat("moveX",input.z);
