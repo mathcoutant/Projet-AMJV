@@ -10,6 +10,7 @@ public class Enemy : Entity
     private EnemyFactory factory;
     [SerializeField] private GameObject xpOrb;
     protected Animator animator;
+
     protected override void Awake()
     {
         base.Awake();
@@ -18,7 +19,7 @@ public class Enemy : Entity
     }
 
 
-    protected override IEnumerator Die()
+    public override IEnumerator Die()
     {
         factory.decreaseEnemyCounter();
         animator.SetBool("Die",true);

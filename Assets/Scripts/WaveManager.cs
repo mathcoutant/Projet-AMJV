@@ -10,12 +10,13 @@ public class WaveManager : MonoBehaviour
 
     public EnemyFactory enemyFactory;
     private InGameCanvas inGameCanvas;
-
+    private PopupManager popupManager;
 
     // Start is called before the first frame update
     void Start()
     {
         inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<InGameCanvas>();
+        popupManager = FindObjectOfType<PopupManager>();
     }
 
     // Update is called once per frame
@@ -25,13 +26,13 @@ public class WaveManager : MonoBehaviour
         {
             canSpawnNextWave = false;
             currentWave++;
-            if (currentWave <= 11)
+            if (currentWave < 11)
             {
                 StartCoroutine(SpawnWave(Fibonacci(currentWave)));
             }
             else
             {
-                StartCoroutine(SpawnWave(89));
+                popupManager.DisplayVictoryPopup();
             }
         }
     }
