@@ -54,7 +54,7 @@ public class Liche : Enemy
                     state = State.STATE_IDLE;
                     break;
                 }
-                 AcquireTarget();
+                AcquireTarget();
                 if (target != null)
                 {
                     navAgent.destination = target.position;
@@ -100,6 +100,7 @@ public class Liche : Enemy
         target = null;
         foreach (GameObject ally in allies)
         {
+            if (!ally) break;
             float h = ally.GetComponent<Entity>().health;
             if (h < minHealth)
             {

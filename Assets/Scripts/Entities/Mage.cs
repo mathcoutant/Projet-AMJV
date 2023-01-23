@@ -49,10 +49,7 @@ public class Mage : Hero
 
     public override void Action2()
     {
-        GameObject obj = Instantiate(orbProjectile);
-        Orb orb = obj.GetComponent<Orb>();
-        orb.SetHitCount(orbHitCount);
-        orb.SetPushForce(orbKnockbackForce);
+        StartCoroutine(SpawnOrb());
     }
 
     public override void Action3()
@@ -61,11 +58,31 @@ public class Mage : Hero
         RaycastHit hit;
         Vector3 pos;
         if (Physics.Raycast(ray, out hit))
-        {
+        {   
             pos = hit.point;
             pos.y = transform.position.y;
-            Instantiate(iceWallPrefab,pos,Quaternion.LookRotation(pos-transform.position,Vector3.up));
+            StartCoroutine(SpawnIceWall(pos));
         }
+    }
+
+    private IEnumerator SpawnOrb()
+    {
+        animator.SetBool("attack2",true);
+        yield return new WaitForSeconds(0.2f);
+        GameObject obj = Instantiate(orbProjectile);
+        Orb orb = obj.GetComponent<Orb>();
+        orb.SetHitCount(orbHitCount);
+        orb.SetPushForce(orbKnockbackForce);
+        animator.SetBool("attack2",false);
+    }
+
+    private IEnumerator SpawnIceWall(Vector3 target)
+    {
+        animator.SetBool("attack3",true);
+        yield return new WaitForSeconds(0.2f);
+        Instantiate(iceWallPrefab,target,Quaternion.LookRotation(target-transform.position,Vector3.up));
+        animator.SetBool("attack3",false);
+        
     }
 
     private IEnumerator Shoot(Vector3 target)
