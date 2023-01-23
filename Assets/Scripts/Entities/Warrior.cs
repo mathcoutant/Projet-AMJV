@@ -123,6 +123,7 @@ public class Warrior : Hero
         foreach (Collider collider in colliders)
         {
             collider.GetComponent<Enemy>().TakeDamage(1);
+            collider.GetComponent<Rigidbody>().AddForce((collider.transform.position - transform.position).normalized * 50f);
         }
 
     }
