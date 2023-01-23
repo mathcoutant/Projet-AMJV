@@ -10,7 +10,8 @@ public class Hero : Entity
     private PlayerController playerController;
     protected Rigidbody rigidbody;
     protected HeroState state = HeroState.STATE_MOVE;
-    [SerializeField] int xpPoints = 0;
+    public int xpPoints = 0;
+    public int nextLevelXpPoints;
     [SerializeField] int level = 0;
 
     protected enum HeroState
@@ -23,8 +24,14 @@ public class Hero : Entity
         rigidbody = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
         popupManager = FindObjectOfType<PopupManager>();
+        CalculateRequiredXpPoints();
     }
 
+
+    private void CalculateRequiredXpPoints()
+    {
+         nextLevelXpPoints = (level + 1) * (level + 1);
+    }
     public virtual void Action1()
     {
     }
@@ -50,10 +57,10 @@ public class Hero : Entity
     public void IncrementXP()
     {
         xpPoints++;
-        int requiredXP = (level + 1) * (level + 1);
-        if (xpPoints >= requiredXP)
+        if (xpPoints >= nextLevelXpPoints)
         {
-            xpPoints -= requiredXP;
+            xpPoints -= nextLevelXpPoints;
+            CalculateRequiredXpPoints();
             level++;
             popupManager.DisplayUpgradePopup();
         }

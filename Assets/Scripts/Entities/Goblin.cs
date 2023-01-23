@@ -34,7 +34,7 @@ public class Goblin : Enemy
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(state);
+        if (player == null) return;
         switch (state)
         {
             case State.STATE_IDLE:

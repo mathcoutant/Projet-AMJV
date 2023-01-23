@@ -20,9 +20,12 @@ public class ExperienceOrb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 dir = player.position - transform.position;
-        float speed = Mathf.Clamp(1 / dir.sqrMagnitude * attractionSpeed, 0, maxSpeed); 
-        transform.Translate(dir * (speed * Time.deltaTime),Space.World);
+        if (player != null)
+        {
+            Vector3 dir = player.position - transform.position;
+            float speed = Mathf.Clamp(1 / dir.sqrMagnitude * attractionSpeed, 0, maxSpeed);
+            transform.Translate(dir * (speed * Time.deltaTime), Space.World);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

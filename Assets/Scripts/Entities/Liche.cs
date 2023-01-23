@@ -26,6 +26,7 @@ public class Liche : Enemy
     // Update is called once per frame
     private void Update()
     {
+        if (player == null) return;
         switch (state)
         {
             case State.STATE_IDLE:
@@ -73,6 +74,7 @@ public class Liche : Enemy
 
     private void Attack()
     {
+        navAgent.speed = 1f;
         Vector3 pos = transform.position + Vector3.down;
         Instantiate(areaOfEffect, pos, transform.rotation, transform);
         canAttack = false;
@@ -105,11 +107,15 @@ public class Liche : Enemy
                 target = ally.transform;
             }
         }
+
+        if (target == null) target = player;
     }
 
     IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
+        navAgent.speed = 2f;
+        yield return new WaitForSeconds(5);
         canAttack = true;
     }
 

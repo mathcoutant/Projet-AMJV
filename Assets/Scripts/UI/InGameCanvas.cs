@@ -8,6 +8,7 @@ public class InGameCanvas : MonoBehaviour
 {
     Hero hero;
     Image healthbar;
+    Image xpbar;
     TextMeshProUGUI timerText;
     TextMeshProUGUI waveText;
     Image cooldownImage1;
@@ -22,6 +23,7 @@ public class InGameCanvas : MonoBehaviour
     {
         hero = GameObject.FindWithTag("Player").GetComponent<Hero>();
         healthbar = GameObject.Find("HealthBarIndicator").GetComponent<Image>();
+        xpbar = GameObject.Find("XpBarIndicator").GetComponent<Image>();
         timerText = GameObject.Find("TextTimeIndicator").GetComponent<TextMeshProUGUI>();
         waveText = GameObject.Find("TextWaveIndicator").GetComponent<TextMeshProUGUI>();
         cooldownImage1 = GameObject.Find("Action1Cooldown").GetComponent<Image>();
@@ -35,6 +37,7 @@ public class InGameCanvas : MonoBehaviour
     void Update()
     {
         UpdateHealthBar();
+        UpdateXpBar();
         timer += Time.deltaTime;
         if (timer - lastTimerUpdate > 1)
         {
@@ -49,6 +52,11 @@ public class InGameCanvas : MonoBehaviour
         healthbar.fillAmount = life;
     }
 
+    private void UpdateXpBar()
+    {
+        float xp = (float)hero.xpPoints / (float)hero.nextLevelXpPoints;
+        xpbar.fillAmount = xp;
+    }
     private void UpdateTimerDisplay(float time)
     {
         int minutes = Mathf.FloorToInt(time / 60);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,9 +15,12 @@ public class Enemy : Entity
         factory = FindObjectOfType<EnemyFactory>();
     }
 
-    protected virtual void OnDestroy()
+
+    protected override IEnumerator Die()
     {
-        Instantiate(xpOrb, transform.position, transform.rotation);
         factory.decreaseEnemyCounter();
+        yield return new WaitForSeconds(1);
+        Instantiate(xpOrb, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }
