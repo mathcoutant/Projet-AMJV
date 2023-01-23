@@ -11,12 +11,12 @@ public class Hero : Entity
     protected Animator animator;
     protected PlayerController playerController;
     protected Rigidbody rigidbody;
-    protected HeroState state = HeroState.STATE_MOVE;
+    public HeroState state = HeroState.STATE_MOVE;
     public int xpPoints = 0;
     public int nextLevelXpPoints;
     [SerializeField] int level = 0;
 
-    protected enum HeroState
+    public enum HeroState
     {
         STATE_MOVE,
         STATE_STUN,
