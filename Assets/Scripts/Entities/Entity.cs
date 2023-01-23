@@ -1,20 +1,42 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Runtime.CompilerServices;
+using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
     public int health = 10;
     public int maxHealth = 10;
+    
 
-    public void TakeDamage(int value)
+    private Material defaultMaterial;
+    [SerializeField] private Material damagedMaterial;
+    private Renderer renderer;
+
+    protected virtual void Awake()
     {
-        health -= value;
-        if (health < 0 ) { health = 0; }
+        renderer = GetComponent<Renderer>();
+        defaultMaterial = renderer.material;
+
     }
 
-    public void GainHealth(int value)
+    public void TakeDamage(int damage)
     {
-        health += value;
-        if (health > maxHealth) { health = maxHealth; }
+        StartCoroutine(DamageFlashing());
+        health -= damage;
+        if(health <= 0) Destroy(gameObject);
     }
 
+    IEnumerator DamageFlashing()
+    {
+        renderer.material = damagedMaterial;
+        yield return new WaitForSeconds(0.3f);
+        renderer.material = defaultMaterial;
+
+    }
+    public void Heal(int healingAmount)
+    {
+        health += healingAmount;
+        if (health > maxHealth) health = maxHealth;
+    }
 }

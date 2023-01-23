@@ -11,7 +11,7 @@ public class UpgradesManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Hero>();
+        player = GameObject.FindWithTag("Player").GetComponent<Hero>();
         upgrades.Add(new Tuple<string, string>("Speed Upgrade", "Boost your hero's speed."));
         upgrades.Add(new Tuple<string, string>("Cooldown Reduction 1", "You regain your action 1 faster."));
         upgrades.Add(new Tuple<string, string>("Cooldown Reduction 2", "You regain your action 2 faster."));

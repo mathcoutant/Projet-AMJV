@@ -1,27 +1,40 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private int damage;
 
     private Rigidbody rigidbody;
+
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+
+    }
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
     }
     
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         rigidbody.velocity = speed * transform.forward;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        
+        Entity entity = other.GetComponent<Entity>();
+        if(entity) entity.TakeDamage(damage);
         Destroy(gameObject);
     }
 }

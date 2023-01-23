@@ -28,7 +28,7 @@ public class PopupManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Hero>();
+        player = GameObject.FindWithTag("Player").GetComponent<Hero>();
 
         inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<InGameCanvas>();
 
@@ -100,7 +100,7 @@ public class PopupManager : MonoBehaviour
 
     public void HideUpgradePopup(int upgradeNum)
     {
-        // player.ApplyUpgrade(possibleUpgrades[upgradeNum].Item1);
+        player.ApplyUpgrade(possibleUpgrades[upgradeNum].Item1);
         Debug.Log("Upgrade : " + possibleUpgrades[upgradeNum].Item1);
         upgradePopupCanvas.SetActive(false);
         Time.timeScale = 1;

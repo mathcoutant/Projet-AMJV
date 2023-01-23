@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -7,6 +8,12 @@ public class CameraFollow : MonoBehaviour
     public float smoothSpeed = 0.125f;
     public Vector3 offset;
 
+
+    private void Start()
+    {
+        target = GameObject.FindWithTag("Player").transform;
+    }
+
     private void LateUpdate()
     {
         Vector3 desiredPosition = target.position + offset;
@@ -14,3 +21,4 @@ public class CameraFollow : MonoBehaviour
         transform.position = smoothedPosition;
     }
 }
+    

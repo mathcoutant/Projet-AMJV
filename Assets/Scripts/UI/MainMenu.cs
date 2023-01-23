@@ -1,23 +1,27 @@
-﻿using System.Collections;
+using System;
+using TMPro;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 
 public class MainMenu : MonoBehaviour
 {
-    private GameObject mainMenuContainer;
-    private GameObject settingsContainer;
-    private GameObject characterContainer;
+
     public Slider volumeSlider;
     public Slider effectSlider;
     public Slider musicSlider;
     public TMP_Dropdown resolutionDropdown;
-    private GameObject nameDescriptionText;
-    private GameObject descriptionText;
-    private GameObject victoryIndicator;
+    private GameObject characterContainer;
     private Image characterImage;
+    private GameObject descriptionText;
+
+    private GameObject mainMenuContainer;
+    private GameObject nameDescriptionText;
+    private GameObject settingsContainer;
+    private GameObject victoryIndicator;
+    private string selectedString;
     [SerializeField] private Sprite warriorImage = null;
     [SerializeField] private Sprite mageImage = null;
     [SerializeField] private Sprite archerImage = null;
@@ -26,7 +30,7 @@ public class MainMenu : MonoBehaviour
     private bool canPlayEffectSample = true;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         characterImage = GameObject.Find("CharacterImageContainer").GetComponent<Image>();
         warriorImage = Resources.Load<Sprite>("Images/CharacterImages/canardtrosad");
@@ -79,6 +83,7 @@ public class MainMenu : MonoBehaviour
         settingsContainer.SetActive(true);
         characterContainer.SetActive(false);
     }
+
     public void SwitchToCharacterScreen()
     {
         mainMenuContainer.SetActive(false);
@@ -88,9 +93,13 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+
+        CharacterSelection.classSelection = selectedString;
         audioManager.SaveVolumeValues();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1,LoadSceneMode.Additive);
     }
+
     public void QuitGame()
     {
         audioManager.SaveVolumeValues();
@@ -100,7 +109,7 @@ public class MainMenu : MonoBehaviour
     private void SliderValueChange(Slider slider, TextMeshProUGUI textObject)
     {
         // Change the text in the indicator in percentage
-        textObject.text = (slider.value * 100).ToString("F0") +"%";
+        textObject.text = (slider.value * 100).ToString("F0") + "%";
     }
     public void PlayEffectSampleSound()
     {
@@ -118,7 +127,7 @@ public class MainMenu : MonoBehaviour
     }
     private void ResolutionDropdownValueChanged()
     {
-        switch(resolutionDropdown.value)
+        switch (resolutionDropdown.value)
         {
             case 0:
                 Screen.SetResolution(1920, 1080, true);
@@ -139,11 +148,12 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-   public void ChangeDescription(int i)
+    public void ChangeDescription(int i)
     {
         string desc = "";
         if (i == 0) { 
             Warrior selectedHero = new Warrior();
+            selectedString = "Warrior";
             desc += "Health : " + selectedHero.maxHealth.ToString() + "\n" + "\n";
             //desc += "Difficulty : " + "" + "\n";
             desc += "Max wave reached : " + Warrior.waveReached.ToString() + "\n";
@@ -163,11 +173,12 @@ public class MainMenu : MonoBehaviour
         }
         if (i == 1) { 
             Mage selectedHero = new Mage();
+            selectedString = "Mage";
             desc += "Health : " + selectedHero.maxHealth.ToString() + "\n" + "\n";
             //desc += "Difficulty : " + "" + "\n";
             desc += "Max wave reached : " + Mage.waveReached.ToString() + "\n";
             desc += Mage.timesPlayed.ToString() + " games played";
-
+            
             nameDescriptionText.GetComponent<TextMeshProUGUI>().text = Mage.nameClass;
             descriptionText.GetComponent<TextMeshProUGUI>().text = desc;
             characterImage.sprite = mageImage;
