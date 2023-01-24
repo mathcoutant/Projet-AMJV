@@ -37,15 +37,7 @@ public class Rogue : Hero
 
     public override void Action1()
     {
-        LayerMask mask = LayerMask.GetMask("Enemy");
-        Collider[] colliders = Physics.OverlapSphere(daggerHitPosition.transform.position,hitRadius,mask);
-        foreach (Collider col in colliders)
-        {
-            Entity entity = col.gameObject.GetComponent<Entity>();
-            entity.TakeDamage(3);
-            StartCoroutine(ApplyPoison(entity));
-            col.gameObject.GetComponent<Rigidbody>().AddForce((col.transform.position - transform.position)*100f);
-        }
+        StartCoroutine(DaggerHit());
     }
 
     public override void Action2()
@@ -71,6 +63,22 @@ public class Rogue : Hero
             Entity entity = col.gameObject.GetComponent<Entity>();
             StartCoroutine(ApplyStun(entity));
         }
+    }
+
+    IEnumerator DaggerHit()
+    {
+        animator.SetBool("attack1",true);
+        yield return new WaitForSeconds(0.3f);
+        LayerMask mask = LayerMask.GetMask("Enemy");
+        Collider[] colliders = Physics.OverlapSphere(daggerHitPosition.transform.position,hitRadius,mask);
+        foreach (Collider col in colliders)
+        {
+                    Entity entity = col.gameObject.GetComponent<Entity>();
+                    entity.TakeDamage(3);
+                    StartCoroutine(ApplyPoison(entity));
+                    col.gameObject.GetComponent<Rigidbody>().AddForce((col.transform.position - transform.position)*100f);
+        }
+        animator.SetBool("attack1",false);
     }
 
     IEnumerator ApplyPoison(Entity entity)
