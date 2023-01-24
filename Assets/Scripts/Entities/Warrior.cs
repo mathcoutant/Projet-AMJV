@@ -9,7 +9,7 @@ public class Warrior : Hero
     public new static int waveReached = 0;
     public new static int timesPlayed = 0;
     public new static bool hasWon = false;
-
+    private bool hasJump = false;
     [SerializeField] private GameObject swordHitPosition;
     [SerializeField] private float hitRadius;
     [SerializeField] private float swirlRadius;
@@ -73,6 +73,7 @@ public class Warrior : Hero
 
     private IEnumerator JumpAttack(Vector3 pos)
     {
+        hasJump = true;
         state = HeroState.STATE_STUN;
         animator.SetBool("attack2",true);
         rigidbody.velocity = SolveInitialVelocityForJump(transform.position, pos); 
@@ -97,11 +98,12 @@ public class Warrior : Hero
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Floor"))
+        if (collision.collider.CompareTag("Floor") && hasJump)
         {
             state = HeroState.STATE_MOVE;
             particleSystem.Play();
             DoPoundDamage();
+            hasJump = false;
         }
     }
 
