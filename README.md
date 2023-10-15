@@ -1,3 +1,3 @@
 # Projet-AMJV
-Projet
-Léo was here
+
+This is a hack'n slash game made to learn Unity.
